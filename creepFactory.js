@@ -103,11 +103,13 @@ class CreepFactory {
   static populationCheck(room) {
     let rcl = room.controller.level;
 
+    room.memory.spawnQueue = [];
     //iterate over each role, check for num vs max, build spawn list
     for (let role in CreepSetup.roles) {
       let roleSetup = CreepSetup.roles[role];
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
+        //TODO add a check for spawns in queue, until then, wipe queue on this call
         let creepNeeded = HelperFunctions.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == role}));
         while (creepNeeded > 0) {
           //spawn queue
@@ -119,7 +121,8 @@ class CreepFactory {
   }
 
   static processSpawnQueue(room) {
-    let q = _.sortBy(room.memory.spawnQueue, ['setup'].weight);
+    let arr = room.memory.spawnQueue;
+    let q = _.sortBy(arr, a => -a.setup.weight);
     while (q.length > 0) {
   log.log( q.length + ' ' + q.pop().role)
     }

@@ -102,7 +102,7 @@ CreepSetup.roles = {
         multiBody   : [WORK, CARRY, MOVE],
         maxMulti    : 9,
         minEnergy   : 200,
-        weight      : 500
+        weight      : 999
       },
       5 : {
         maxSpawned  : 1,
@@ -110,7 +110,7 @@ CreepSetup.roles = {
         multiBody   : [WORK, CARRY, MOVE],
         maxMulti    : 9,
         minEnergy   : 200,
-        weight      : 500
+        weight      : 999
       },
       6 : {
         maxSpawned  : 1,
@@ -118,7 +118,7 @@ CreepSetup.roles = {
         multiBody   : [WORK, CARRY, MOVE],
         maxMulti    : 9,
         minEnergy   : 200,
-        weight      : 500
+        weight      : 999
       },
       7 : {
         maxSpawned  : 1,
@@ -126,7 +126,7 @@ CreepSetup.roles = {
         multiBody   : [WORK, CARRY, MOVE],
         maxMulti    : 9,
         minEnergy   : 200,
-        weight      : 500
+        weight      : 999
       },
       8 : {
         maxSpawned  : 1,
@@ -134,7 +134,7 @@ CreepSetup.roles = {
         multiBody   : [WORK, CARRY, MOVE],
         maxMulti    : 9,
         minEnergy   : 200,
-        weight      : 500
+        weight      : 999
       },
     }
   },
@@ -145,52 +145,52 @@ CreepSetup.roles = {
       1 : noSetup,
       2 : noSetup,
       3 : {
-        maxSpawned  : (room) => _.size(room.memory.sources) * 3,
+        maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
         baseBody    : [CARRY, CARRY, MOVE],
         multiBody   : [CARRY, CARRY, MOVE],
         maxMulti    : 10,
         minEnergy   : 150,
-        weight      : 500
+        weight      : 200
       },
       4 : {
-        maxSpawned  : (room) => _.size(room.memory.sources) * 3,
+        maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
         baseBody    : [CARRY, CARRY, MOVE],
         multiBody   : [CARRY, CARRY, MOVE],
         maxMulti    : 20,
         minEnergy   : 150,
-        weight      : 500
+        weight      : 200
       },
       5 : {
-        maxSpawned  : (room) => _.size(room.memory.sources) * 2,
+        maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
         baseBody    : [CARRY, CARRY, MOVE],
         multiBody   : [CARRY, CARRY, MOVE],
         maxMulti    : 30,
         minEnergy   : 150,
-        weight      : 500
+        weight      : 200
       },
       6 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
+        maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
         baseBody    : [CARRY, CARRY, MOVE],
         multiBody   : [CARRY, CARRY, MOVE],
         maxMulti    : 60,
         minEnergy   : 150,
-        weight      : 500
+        weight      : 200
       },
       7 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
+        maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
         baseBody    : [CARRY, CARRY, MOVE],
         multiBody   : [CARRY, CARRY, MOVE],
         maxMulti    : 60,
         minEnergy   : 150,
-        weight      : 500
+        weight      : 200
       },
       8 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
+        maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
         baseBody    : [CARRY, CARRY, MOVE],
         multiBody   : [CARRY, CARRY, MOVE],
         maxMulti    : 60,
         minEnergy   : 150,
-        weight      : 500
+        weight      : 200
       }
     }
   }
