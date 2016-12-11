@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 require('requires');
 
-module.exports.loop = function() {
+module.exports.loop = function () {
   let gTick = Game.time;
   log.log('***************NEW TICK***************' + gTick + '***************');
 

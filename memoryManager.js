@@ -52,7 +52,7 @@ class MemoryManager {
 
     //if the Memory.room doesnt exist in my rooms, delete it.
     //later may need to save rooms, for now leave as is
-    for (let r in Memory.rooms){
+    for (let r in Memory.rooms) {
       if (!_.find(Game.rooms, (o) => o.name == r))
         delete Memory.rooms[r];
     }

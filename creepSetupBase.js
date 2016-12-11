@@ -1,73 +1,35 @@
 "use strict";
 
-global.CreepSetup = {};
+global.CreepSetupBase = class {
+  constructor(role) {
+    this.role = role;
+    this.minRCL = 0;
 
-let noSetup = {
-  maxSpawned  : 0,
-  baseBody    : [],
-  multiBody   : [],
-  maxMulti    : 0,
-  minEnergy   : 0,
-  weight      : 0
+    this.noSetup = {
+      maxSpawned: 0,
+      baseBody: [],
+      multiBody: [],
+      maxMulti: 0,
+      minEnergy: 0,
+      weight: 0
+    };
+
+    this.RCL = {
+      1: this.noSetup,
+      2: this.noSetup,
+      3: this.noSetup,
+      4: this.noSetup,
+      5: this.noSetup,
+      6: this.noSetup,
+      7: this.noSetup,
+      8: this.noSetup
+    };
+  }
 };
 
 
+
 CreepSetup.roles = {
-  miner : {
-    minRCL : 3,
-    RCL : {
-      1 : noSetup,
-      2 : noSetup,
-      3 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
-        baseBody    : [WORK, WORK, WORK, WORK, MOVE],
-        multiBody   : [WORK, MOVE],
-        maxMulti    : 1,
-        minEnergy   : 250,
-        weight      : 500
-      },
-      4 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
-        baseBody    : [WORK, WORK, WORK, WORK, MOVE],
-        multiBody   : [WORK, MOVE],
-        maxMulti    : 1,
-        minEnergy   : 250,
-        weight      : 500
-      },
-      5 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
-        baseBody    : [WORK, WORK, WORK, WORK, MOVE],
-        multiBody   : [WORK, MOVE],
-        maxMulti    : 1,
-        minEnergy   : 250,
-        weight      : 500
-      },
-      6 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
-        baseBody    : [WORK, WORK, WORK, WORK, MOVE],
-        multiBody   : [WORK, MOVE],
-        maxMulti    : 1,
-        minEnergy   : 250,
-        weight      : 500
-      },
-      7 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
-        baseBody    : [WORK, WORK, WORK, WORK, MOVE],
-        multiBody   : [WORK, MOVE],
-        maxMulti    : 1,
-        minEnergy   : 250,
-        weight      : 500
-      },
-      8 : {
-        maxSpawned  : (room) => _.size(room.memory.sources),
-        baseBody    : [WORK, WORK, WORK, WORK, MOVE],
-        multiBody   : [WORK, MOVE],
-        maxMulti    : 1,
-        minEnergy   : 250,
-        weight      : 500
-      }
-    }
-  },
 
   worker : {
     minRCL : 1,

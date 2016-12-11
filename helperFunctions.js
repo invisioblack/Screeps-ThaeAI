@@ -3,7 +3,7 @@
 class HelperFunctions {
 
   static objOrFunc(obj, param) {
-    if(obj == null)
+    if (obj == null)
       return null;
     if (typeof obj === 'function')
       return obj(param);
@@ -19,10 +19,7 @@ class HelperFunctions {
 }
 
 
-
 global.HelperFunctions = HelperFunctions;
-
-
 
 
 /*
@@ -94,5 +91,5 @@ global.HelperFunctions = HelperFunctions;
 
 
 
-*/
+ */
 

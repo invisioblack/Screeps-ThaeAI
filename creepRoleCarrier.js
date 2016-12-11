@@ -27,11 +27,13 @@ class RoleCarrier extends RoleBase {
     //Perform work functions. These functions should be overridden in sub role
     if (working) {
       //full, should be moving to a dump
-      let site = this.creep.pos.findClosestByRange(FIND_MY_STRUCTURES, { filter: (s) =>
+      let site = this.creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+        filter: (s) =>
         (  s.structureType == STRUCTURE_SPAWN ||
-           s.structureType == STRUCTURE_EXTENSION ||
-           s.structureType == STRUCTURE_TOWER)
-        && s.energy < s.energyCapacity});
+        s.structureType == STRUCTURE_EXTENSION ||
+        s.structureType == STRUCTURE_TOWER)
+        && s.energy < s.energyCapacity
+      });
 
       if (site != null) {
         if (this.creep.transfer(site, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -56,7 +58,7 @@ class RoleCarrier extends RoleBase {
   }
 
   //Only need to move to the location and mine, only has MOVE and WORK
-  static generateBody (energy = 100) {
+  static generateBody(energy = 100) {
     //Minimum value for [MOVE, CARRY]
     if (energy < 100)
       energy = 100;
@@ -78,9 +80,9 @@ class RoleCarrier extends RoleBase {
       let totalParts = Math.floor(energy / 50);
       let counter = 0;
       while (totalParts > 0) {
-        console.log(carryPerMove % counter)
-        console.log(counter)
-        console.log(carryPerMove)
+        console.log(carryPerMove % counter);;;;;;;;;;;;;;;;;;;;;;;;;
+        console.log(counter);;;;;;;;;;;;;;;;;;;;;;;;;
+        console.log(carryPerMove);;;;;;;;;;;;;;;;;;;;;;;;;
         if ((totalParts % carryPerMove) == 0) {
           totalParts--;
           numMove++;
@@ -100,7 +102,7 @@ class RoleCarrier extends RoleBase {
         }
         carry = false;
       } else {
-        if (numMove > 0){
+        if (numMove > 0) {
           numMove--;
           body.push(MOVE);
         }

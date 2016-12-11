@@ -24,7 +24,7 @@ class RoleMiner extends RoleBase {
   }
 
   static findUnusedSourceID(room) {
-    return room.find(FIND_SOURCES, { filter: (s) =>  !s.memory.miner })[0].id;
+    return room.find(FIND_SOURCES, {filter: (s) => !s.memory.miner})[0].id;
   }
 
   static setSourceMiner(sID, creep) {
@@ -44,7 +44,7 @@ class RoleMiner extends RoleBase {
   }
 
   //Only need to move to the location and mine, only has MOVE and WORK
-  static generateBody (energy = 150, numMoves = 1) {
+  static generateBody(energy = 150, numMoves = 1) {
     //Minimum value for [WORK, MOVE]
     if (energy < 150)
       energy = 150;
@@ -57,14 +57,14 @@ class RoleMiner extends RoleBase {
     let body = [];
 
     //default of 1 move, may add more
-    while (numMoves > 0){
+    while (numMoves > 0) {
       energy -= 50;
       numMoves--;
       body.push(MOVE);
     }
 
     //Number of WORK parts to be added
-    let numParts = Math.floor(energy/100);
+    let numParts = Math.floor(energy / 100);
     while (numParts > 0) {
       numParts--;
       body.push(WORK);

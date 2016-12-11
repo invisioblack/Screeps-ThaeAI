@@ -6,7 +6,7 @@ class CreepFactory {
     for (let c in Game.creeps) {
       let creep = Game.creeps[c];
       let loadedCreep = null;
-      switch(creep.memory['role']) {
+      switch (creep.memory['role']) {
         case 'builder':
           loadedCreep = new RoleBuilder(creep);
           break;
@@ -37,7 +37,7 @@ class CreepFactory {
   //TODO: Shove spawn code into static class methods
   static spawn(role, spawner, maxEnergy = -1) {
     //if no sourceIndex set or is too high, set to 0
-    if ((!Memory.sourceIndex) ||(Memory.sourceIndex >= Game.spawns.Spawn1.room.find(FIND_SOURCES).length))
+    if ((!Memory.sourceIndex) || (Memory.sourceIndex >= Game.spawns.Spawn1.room.find(FIND_SOURCES).length))
       Memory.sourceIndex = 0;
     let room = spawner.room;
     if (maxEnergy < 0)
@@ -57,7 +57,7 @@ class CreepFactory {
     let body = null;
 
     //creep init
-    switch(role) {
+    switch (role) {
       case 'builder':
         break;
       case 'miner':
@@ -82,7 +82,7 @@ class CreepFactory {
       Memory.sourceIndex++;
 
       //creep success, perform post processing
-      switch(role) {
+      switch (role) {
         case 'builder':
           break;
         case 'miner':
@@ -95,8 +95,6 @@ class CreepFactory {
       }
     }
   }
-
-
 
 
   //Uses passed room object to check for mim pop and adds missing creeps to the spawn queue
@@ -113,7 +111,7 @@ class CreepFactory {
         let creepNeeded = HelperFunctions.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == role}));
         while (creepNeeded > 0) {
           //spawn queue
-          room.memory.spawnQueue.push({ role : role, setup : roleSetup.RCL[rcl]});
+          room.memory.spawnQueue.push({role: role, setup: roleSetup.RCL[rcl]});
           creepNeeded--;
         }
       }
@@ -124,7 +122,7 @@ class CreepFactory {
     let arr = room.memory.spawnQueue;
     let q = _.sortBy(arr, a => -a.setup.weight);
     while (q.length > 0) {
-  log.log( q.length + ' ' + q.pop().role)
+      log.log(q.length + ' ' + q.pop().role)
     }
   }
 }
