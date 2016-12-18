@@ -1,11 +1,6 @@
 "use strict";
 
-class MemoryManager {
-  constructor() {
-
-  }
-
-
+global.MemoryManager = class {
   //TODO make this usable every loop to update new rooms I own? Or add a new function add a new room to memory
   static buildRoomMemory() {
     if (!Memory.rooms)
@@ -57,6 +52,4 @@ class MemoryManager {
         delete Memory.rooms[r];
     }
   }
-}
-
-global.MemoryManager = MemoryManager;
+};

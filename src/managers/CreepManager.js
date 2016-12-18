@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-class CreepFactory {
+global.CreepManager = class {
   static doActions() {
     //iterate over creeps and load their handlers
     for (let c in Game.creeps) {
@@ -125,7 +125,4 @@ class CreepFactory {
       log.log(q.length + ' ' + q.pop().role)
     }
   }
-}
-
-
-global.CreepFactory = CreepFactory;
+};

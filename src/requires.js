@@ -11,18 +11,18 @@ import './prototypes/RoomPosition';
 import './prototypes/Source';
 import './prototypes/Structure';
 
+//creeps
+//roles
+import './creep/role/CreepRoleBase';
+import './creep/role/CreepRoleCarrier';
+import './creep/role/CreepRoleMiner';
 
-//Roles
-import './CreepRole/creepRoleBase';
-import './CreepRole/creepRoleCarrier';
-import './CreepRole/creepRoleMiner';
+//setups
+import './creep/setup/CreepSetupBase';
+import './creep/setup/CreepSetupCarrier';
+import './creep/setup/CreepSetupMiner';
+import './creep/setup/CreepSetupWorker';
 
-//Creep Setup
-import './CreepSetup/creepSetupBase';
-import './CreepSetup/creepSetupCarrier';
-import './CreepSetup/creepSetupMiner';
-import './CreepSetup/creepSetupWorker';
-
-//Managers/Factories
-import './memoryManager';
-import './creepFactory';
+//Managers
+import './managers/MemoryManager';
+import './managers/CreepManager';
