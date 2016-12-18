@@ -1,0 +1,8 @@
+{
+  "localPath": "SCREEPS_PATH_HERE",
+  "defaultTarget": "dev",
+  "targets": {
+    "dev": "ThaeAI-dev",
+    "prod": "ThaeAI"
+  }
+}

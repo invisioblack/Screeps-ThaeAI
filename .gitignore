@@ -1,4 +1,4 @@
 .idea/
 node_modules/
 stuff
-webpack.config.js
+config.json
