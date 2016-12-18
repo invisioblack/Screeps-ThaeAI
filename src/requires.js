@@ -1,6 +1,6 @@
 'use strict';
 
-require('helperFunctions');
+require('./helperFunctions');
 
 //roleClasses
 require('./CreepRole/creepRoleBase');
@@ -15,8 +15,8 @@ require('./CreepSetup/creepSetupWorker');
 
 
 //require('populationManager');
-require('memoryManager');
-require('creepFactory');
+require('./memoryManager');
+require('./creepFactory');
 
 
 //define memory prototypes for structures and sources

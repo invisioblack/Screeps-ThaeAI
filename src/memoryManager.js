@@ -15,7 +15,7 @@ class MemoryManager {
       let room = Game.rooms[r];
       if (room.find(FIND_MY_STRUCTURES).length > 0) {
         //this is my room, now do stuff
-        //it doesnt exist yet
+        //it doesn't exist yet
         if (Memory.rooms[r] == undefined) {
           let mem = {};
 
@@ -37,7 +37,7 @@ class MemoryManager {
     }
   }
 
-  //TODO iterate over rooms memory and clear out ones that i dont own
+  //TODO iterate over rooms memory and clear out ones that i don't own
   static garbageCollection() {
     for (let c in Memory.creeps) {
       if (!Game.creeps[c])
@@ -50,7 +50,7 @@ class MemoryManager {
         delete Memory.sources[c].miner;
     }
 
-    //if the Memory.room doesnt exist in my rooms, delete it.
+    //if the Memory.room doesn't exist in my rooms, delete it.
     //later may need to save rooms, for now leave as is
     for (let r in Memory.rooms) {
       if (!_.find(Game.rooms, (o) => o.name == r))

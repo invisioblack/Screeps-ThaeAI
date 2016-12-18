@@ -75,8 +75,8 @@ global.RoleBase = class {
   }
 
   //Prototype function for work portion of the cycle, should be overridden in sub roles
-  doWork() { //cant be static, has to be overriden to do work
-    console.log('A subrole has not overriden doWork() or calling baseRole somehow.');
+  doWork() { //cant be static, has to be overridden to do work
+    console.log('A subrole has not overridden doWork() or calling baseRole somehow.');
   }
 
   //Default function that will go to the source based on the saved index and mine from it

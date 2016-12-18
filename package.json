@@ -10,5 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/thaelina/Screeps-ThaeAI.git"
   },
-  "author": "Thaelina"
+  "author": "Thaelina",
+  "bugs": {
+    "url": "https://github.com/thaelina/Screeps-ThaeAI/issues"
+  },
+  "homepage": "https://github.com/thaelina/Screeps-ThaeAI#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "webpack": "^1.14.0",
+    "webpack-stream": "^3.2.0"
+  },
+  "keywords": [],
+  "license": "ISC"
 }
