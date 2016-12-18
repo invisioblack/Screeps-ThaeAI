@@ -1,9 +1,8 @@
-/*jshint esversion: 6, node: true */
 'use strict';
 
-const gutil = require('gulp-util');
-const del = require('del');
 const gulp = require('gulp');
+const del = require('del');
+const gutil = require('gulp-util');
 const webpack = require('webpack-stream');
 
 /********/
