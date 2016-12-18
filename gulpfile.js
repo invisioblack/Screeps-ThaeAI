@@ -4,7 +4,6 @@
 const gutil = require('gulp-util');
 const del = require('del');
 const gulp = require('gulp');
-const path = require('path');
 const webpack = require('webpack-stream');
 
 /********/

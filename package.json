@@ -2,9 +2,12 @@
   "name": "ThaeAI",
   "version": "1.0.0",
   "description": "AI for MMO programming game Screeps",
-  "main": "./dist/main.js",
+  "main": "./dist/ThaeAI/main.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js"
+    "deploy": "gulp build",
+    "deploy-prod": "gulp build --target prod",
+    "watch": "gulp watch",
+    "watch-prod": "gulp watch --target prod"
   },
   "repository": {
     "type": "git",

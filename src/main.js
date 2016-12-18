@@ -1,6 +1,6 @@
 'use strict';
 
-require('./requires');
+import './requires';
 
 module.exports.loop = function () {
   let gTick = Game.time;
