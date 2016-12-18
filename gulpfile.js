@@ -58,7 +58,9 @@ const buildConfig = config.targets[buildTarget];
 
 
 gulp.task('clean', function () {
-  return del(['dist/tmp/*', 'dist/' + buildConfig + '/*']);
+  return del(['dist/tmp/*', 'dist/' + buildConfig + '/*']).then(paths => {
+    gutil.log('Files and folders that would be deleted:\n\t', gutil.colors.magenta(paths.join('\n\t')));
+  });
 });
 
 gulp.task('compile', ['clean'], function bundle() {
@@ -76,13 +78,13 @@ gulp.task('copy', ['compile'], function() {
 
 gulp.task('watch', function () {
   gulp.watch('src/**/*.js', ['copy'])
-      .on('all', function(event, path, stats) {
-        console.log('');
-        gutil.log(gutil.colors.green('File ' + path + ' was ' + event + 'ed, running tasks...'));
-      })
-      .on('error', function () {
-        gutil.log(gutil.colors.green('Error during build tasks: aborting'));
-      });
+    .on('all', function(event, path, stats) {
+      console.log('');
+      gutil.log(gutil.colors.green('File ' + path + ' was ' + event + 'ed, running tasks...'));
+    })
+    .on('error', function () {
+      gutil.log(gutil.colors.green('Error during build tasks: aborting'));
+    });
 });
 
 gulp.task('build', ['copy'], function buildDone(done) {
