@@ -80,9 +80,9 @@ class RoleCarrier extends RoleBase {
       let totalParts = Math.floor(energy / 50);
       let counter = 0;
       while (totalParts > 0) {
-        console.log(carryPerMove % counter);;;;;;;;;;;;;;;;;;;;;;;;;
-        console.log(counter);;;;;;;;;;;;;;;;;;;;;;;;;
-        console.log(carryPerMove);;;;;;;;;;;;;;;;;;;;;;;;;
+        console.log(carryPerMove % counter);
+        console.log(counter);
+        console.log(carryPerMove);
         if ((totalParts % carryPerMove) == 0) {
           totalParts--;
           numMove++;

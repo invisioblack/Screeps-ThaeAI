@@ -4,8 +4,8 @@ let setup = new CreepSetupBase('carrier');
 
 setup.minRCL = 3;
 setup.RCL = {
-  1 : noSetup,
-  2 : noSetup,
+  1 : this.noSetup,
+  2 : this.noSetup,
   3 : {
     maxSpawned  : (room) => Math.floor(_.size(room.memory.sources) / 2),
     baseBody    : [CARRY, CARRY, MOVE],

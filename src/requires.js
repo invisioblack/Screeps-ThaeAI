@@ -3,20 +3,19 @@
 require('helperFunctions');
 
 //roleClasses
-require('creepRoleBase');
-require('creepRoleCarrier');
-require('creepRoleMiner');
-
-//require('roleRepairer');
-//require('roleUpgrader');
-//require('roleBuilder');
+require('./CreepRole/creepRoleBase');
+require('./CreepRole/creepRoleCarrier');
+require('./CreepRole/creepRoleMiner');
 
 //setupClasses
-require('creepSetupBase');
+require('./CreepSetup/creepSetupBase');
+require('./CreepSetup/creepSetupCarrier');
+require('./CreepSetup/creepSetupMiner');
+require('./CreepSetup/creepSetupWorker');
 
 
-require('memoryManager');
 //require('populationManager');
+require('memoryManager');
 require('creepFactory');
 
 
