@@ -1,9 +1,10 @@
 'use strict';
+import {CreepSetup} from './CreepSetupBase';
 
-let csc = new CreepSetup('carrier');
+let setup = new CreepSetup('carrier');
 
-csc.minRCL = 3;
-csc.RCL = {
+setup.minRCL = 3;
+setup.RCL = {
   1 : this.noSetup,
   2 : this.noSetup,
   3 : {
@@ -56,4 +57,4 @@ csc.RCL = {
   }
 };
 
-CreepSetups['carrier'] = csc;
+CreepSetups['carrier'] = setup;

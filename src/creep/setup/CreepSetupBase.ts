@@ -1,6 +1,6 @@
 'use strict';
 
-class CreepSetup {
+export class CreepSetup {
   //_role
   private _role : string;
   get role(): string {
@@ -56,3 +56,5 @@ class CreepSetup {
     };
   }
 }
+
+global.CreepSetups = {};

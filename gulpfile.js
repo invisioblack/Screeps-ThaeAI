@@ -75,7 +75,6 @@ gulp.task('ts-compile', ['clean'], function tsc() {
   global.compileFailed = false;
   return tsProject.src()
     .pipe(tsProject())
-    .on('error', (err) => global.compileFailed = true)
     .js.pipe(gulp.dest('dist/tmp'));
 });
 
@@ -85,7 +84,6 @@ gulp.task('compile-flat', ['ts-compile'],
       .pipe(gulpDotFlatten(0))
       .pipe(gulp.dest('dist/' + buildConfig));
 });
-
 
 gulp.task('copy-flat', ['compile-flat'], function() {
   return gulp.src('dist/' + buildConfig + '/*')
@@ -119,3 +117,10 @@ gulp.task('build', ['copy'], function buildDone(done) {
 });
 
 gulp.task('default', ['watch']);
+
+//webpacked
+//build -> copy -> compile -> clean
+
+//flattened
+//build-flat -> copy-flat -> compile-flat -> ts-compile -> clean
+//watch -> copy-flat -> compile-flat -> ts-compile -> clean

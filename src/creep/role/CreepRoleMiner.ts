@@ -1,6 +1,7 @@
-"use strict";
+'use strict';
+import {RoleBase} from './CreepRoleBase';
 
-class RoleMiner extends RoleBase {
+export class RoleMiner extends RoleBase {
   constructor(creep: Creep) {
     super(creep);
   }

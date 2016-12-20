@@ -1,6 +1,6 @@
 'use strict';
 
-class RoleBase  {
+export class RoleBase  {
   protected creep : Creep;
   constructor(creep: Creep) {
     this.creep = creep;
@@ -60,5 +60,4 @@ class RoleBase  {
       this.creep.moveTo(source[memIndex]);
     }
   }
-
 }
