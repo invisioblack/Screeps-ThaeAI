@@ -57,4 +57,4 @@ setup.RCL = {
   }
 };
 
-CreepSetup['miner'] = setup;
+CreepSetups['miner'] = setup;

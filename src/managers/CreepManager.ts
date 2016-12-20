@@ -1,4 +1,5 @@
 'use strict';
+import {HelperFunctions as hf} from '../helperFunctions'
 
 export class CreepManager {
   static doActions() {
@@ -16,55 +17,32 @@ export class CreepManager {
     }
   }
 
-  //role of the creep, the spawner object to spawn, max energy usable for this creep
-  //if negative, use the maximum possible in the room, get room object from spawn object
-  //TODO: Shove spawn code into static class methods
-  static spawn(role, spawner, maxEnergy = -1) {
-    //if no sourceIndex set or is too high, set to 0
-    if ((!Memory.sourceIndex) || (Memory.sourceIndex >= Game.spawns['Spawn1'].room.find(FIND_SOURCES).length))
-      Memory.sourceIndex = 0;
-    let room = spawner.room;
-    if (maxEnergy < 0)
-      maxEnergy = room.energyCapacityAvailable;
-    /*
-     TOUGH 	        10
-     MOVE 	        50
-     CARRY 	        50
-     ATTACK 	      80
-     WORK 	        100
-     RANGED_ATTACK  150
-     HEAL 	        250
-     CLAIM 	        600
-     */
+
+  static spawn(role, room) : boolean {
+    let maxEnergy = room.energyCapacityAvailable;
+    let spawner = null;
+
+    for (let s of room.find(FIND_MY_SPAWNS)){
+      if (!s.spawning)
+        spawner = s;
+    }
+
+    //no available spawns
+    if (spawner == null)
+      return false;
 
     let mem = null;
     let body = null;
 
-    //creep init
-    switch (role) {
-
-    }
 
     let name = role + '-' + Game.time;
     //console.log("TrySpawn: " + name + ' PartsUsed: ' + Math.floor(maxEnergy / 200) + ' Memory: ' + JSON.stringify(mem));
-    let canMake = spawner.canCreateCreep(body, name);
-    if (canMake === OK) {
+    if (spawner.canCreateCreep(body, name) === OK) {
       let creep = spawner.createCreep(body, name, mem);
-      console.log("Spawned: " + name + ' PartsUsed: ' + Math.floor(maxEnergy / 200) + ' Memory: ' + JSON.stringify(mem));
-      Memory.sourceIndex++;
+      log.log("Spawned: " + name + ' PartsUsed: ' + Math.floor(maxEnergy / 200) + ' Memory: ' + ex(mem));
 
       //creep success, perform post processing
-      switch (role) {
-        case 'builder':
-          break;
-        case 'miner':
-          RoleMiner.setSourceMiner(mem.sID, creep);
-          break;
-        case 'repairer':
-          break;
-        case 'upgrader':
-          break;
-      }
+
     }
   }
 
@@ -73,17 +51,23 @@ export class CreepManager {
   static populationCheck(room) {
     let rcl = room.controller.level;
 
+    //wipe spawn queue for now
+    if (room.memory.spawnQueue)
+      delete room.memory.spawnQueue;
+
     room.memory.spawnQueue = [];
+
     //iterate over each role, check for num vs max, build spawn list
     for (let role in CreepSetups) {
       let roleSetup = CreepSetups[role];
+
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
         //TODO add a check for spawns in queue, until then, wipe queue on this call
-        let creepNeeded = HelperFunctions.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == role}));
+        let creepNeeded = hf.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == role}));
         while (creepNeeded > 0) {
           //spawn queue
-          room.memory.spawnQueue.push(role);
+          room.memory.spawnQueue.push(roleSetup.RCL[rcl]);
           creepNeeded--;
         }
       }
@@ -92,9 +76,21 @@ export class CreepManager {
 
   static processSpawnQueue(room) {
     let arr = room.memory.spawnQueue;
+    if (!arr || arr.length < 1)
+      return;
+    let done = false;
     let q = _.sortBy(arr, function(a : any) { return -a.weight; });
-    while (q.length > 0) {
-      log.log(q.length + ' ' + q.pop().role)
+    while (!done) {
+      let tmp = q.shift();
+      if (tmp) {
+        if (!CreepManager.spawn(tmp, room))
+        {
+          q.unshift(tmp);
+          done = true;
+        }
+      } else {
+        done = true;
+      }
     }
   }
 }

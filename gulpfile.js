@@ -59,7 +59,7 @@ const buildConfig = config.targets[buildTarget];
 
 
 gulp.task('clean', function () {
-  return del(['dist/tmp/*', 'dist/' + buildConfig + '/*']).then(paths => {
+  return del(['dist/tmp/*', 'dist/' + buildConfig + '/*', config.localPath + '/' + buildConfig + '/*'], { force: true }).then(paths => {
     gutil.log('Files and folders that would be deleted:\n\t', gutil.colors.magenta(paths.join('\n\t')));
   });
 });
@@ -96,7 +96,7 @@ gulp.task('copy', ['compile'], function() {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('src/**/*.js', ['copy-flat'])
+  gulp.watch('src/**/*.ts', ['copy-flat'])
     .on('all', function(event, path, stats) {
       console.log('');
       gutil.log(gutil.colors.green('File ' + path + ' was ' + event + 'ed, running tasks...'));

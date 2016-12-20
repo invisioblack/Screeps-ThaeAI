@@ -1,6 +1,6 @@
 'use strict';
 
-class HelperFunctions {
+export class HelperFunctions {
 
   static objOrFunc(obj, param) {
     if (obj == null)

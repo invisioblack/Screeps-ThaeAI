@@ -2,8 +2,9 @@ declare let module: any;
 declare let global: any;
 
 declare let LOGGING_ENABLED: boolean;
+declare let JSON_STRINGIFY_EXPANDED: boolean;
 declare let log: any;
-declare function ex(x: any) : void;
+declare function ex(x: any) : string;
 declare function errName(err: number) : string;
 
 declare let CreepSetups: CreepSetup[];
@@ -22,6 +23,10 @@ interface Memory {
   structures: {
     [name: string]: any;
   };
+
+  room: {
+    ['spawnQueue']: CreepSetup;
+  }
 
   sourceIndex: number;
 }
@@ -43,23 +48,24 @@ declare class MemoryManager {
 
 declare class CreepManager {
   static doActions(): void;
-  static spawn(role: any, spawner: any, maxEnergy?: number): void;
+  static spawn(role: any, room: Room): boolean;
   static populationCheck(room: any): void;
   static processSpawnQueue(room: any): void;
 }
 
+declare class HelperFunctions {
+  static objOrFunc(obj: any, param: any): any;
+  static massSuicide(): void;
+  static getBalancedBody(energy: any): any[];
+}
 
 //creeps
 declare class CreepSetup {
-  private _role;
-  readonly role: string;
-  private _minRCL;
+  role: string;
   minRCL: number;
-  private _noSetup;
-  readonly noSetup: any;
-  private _RCL;
+  noSetup: any;
   RCL: any;
-  constructor(role: any);
+  constructor(role: string);
 }
 
 //roles

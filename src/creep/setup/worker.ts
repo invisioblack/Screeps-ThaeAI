@@ -71,4 +71,4 @@ setup.RCL = {
   }
 };
 
-CreepSetup['worker'] = setup;
+CreepSetups['worker'] = setup;

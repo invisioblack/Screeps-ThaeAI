@@ -1,7 +1,7 @@
 'use strict';
 import {CreepSetup} from './base';
 
-let setup = new CreepSetup('carrier');
+let setup = new CreepSetup("carrier");
 
 setup.minRCL = 3;
 setup.RCL = {

@@ -4,6 +4,8 @@ global.CreepSetups = {};
 
 //globals credit of semperrabbit and warinternal
 global.LOGGING_ENABLED = true;
+global.JSON_STRINGIFY_EXPANDED = false;
+
 global.log = {
   log: function log(arg) {
     if (LOGGING_ENABLED)return console.log(arg)
@@ -13,14 +15,11 @@ global.log = {
   },
   err: function err(arg) {
     if (LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
-  },
-  error: function error(arg) {
-    if (LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
-  },
+  }
 };
 
-global.ex = function (x: any) : void {
-  JSON.stringify(x, null, 2);
+global.ex = function (x: any) : string {
+    return JSON.stringify(x, null, JSON_STRINGIFY_EXPANDED ? 1 : 0);
 };
 
 global.errName = function (err: number): string {
