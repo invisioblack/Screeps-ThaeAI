@@ -1,6 +1,6 @@
 "use strict";
 
-global.MemoryManager = class {
+class MemoryManager {
   //TODO make this usable every loop to update new rooms I own? Or add a new function add a new room to memory
   static buildRoomMemory() {
     if (!Memory.rooms)
@@ -12,15 +12,15 @@ global.MemoryManager = class {
         //this is my room, now do stuff
         //it doesn't exist yet
         if (Memory.rooms[r] == undefined) {
-          let mem = {};
+          let mem : any = {};
 
           mem.sources = [];
-          for (let s of room.find(FIND_SOURCES)) {
+          for (let s of room.find<Source>(FIND_SOURCES)) {
             mem.sources.push(s.id);
           }
 
           mem.spawns = [];
-          for (let s of room.find(FIND_MY_SPAWNS)) {
+          for (let s of room.find<Spawn>(FIND_MY_SPAWNS)) {
             mem.spawns.push(s.name);
           }
 
@@ -52,4 +52,4 @@ global.MemoryManager = class {
         delete Memory.rooms[r];
     }
   }
-};
+}

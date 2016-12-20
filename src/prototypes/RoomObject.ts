@@ -1,6 +1,6 @@
 'use strict';
 
-RoomObject.prototype.lookNear = function(asArray, range=1) {
+RoomObject.prototype.lookNear = function(asArray: boolean, range=1): LookAtResultMatrix | LookAtResultWithPos[] {
   let {x,y} = this.pos;
   return this.room.lookAtArea(	Math.max(0, y-range),
     Math.max(0, x-range),
@@ -9,7 +9,7 @@ RoomObject.prototype.lookNear = function(asArray, range=1) {
     asArray);
 };
 
-RoomObject.prototype.lookForNear = function(lookFor, asArray, range=1) {
+RoomObject.prototype.lookForNear = function(lookFor: string, asArray: boolean, range=1): LookAtResultMatrix | LookAtResultWithPos[] {
   let {x,y} = this.pos;
   return this.room.lookForAtArea(lookFor,
     Math.max(0, y-range),

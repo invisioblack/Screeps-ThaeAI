@@ -2,27 +2,26 @@
 
 //globals credit of semperrabbit and warinternal
 global.LOGGING_ENABLED = true;
-global.logging = function (bool) {
-  global.LOGGING_ENABLED = bool
-};
 global.log = {
   log: function log(arg) {
-    if (global.LOGGING_ENABLED)return console.log(arg)
+    if (LOGGING_ENABLED)return console.log(arg)
   },
   warn: function warn(arg) {
-    if (global.LOGGING_ENABLED)return console.log('<span style=color:#FFBF3F>' + arg + '</span>');
+    if (LOGGING_ENABLED)return console.log('<span style=color:#FFBF3F>' + arg + '</span>');
   },
   err: function err(arg) {
-    if (global.LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
+    if (LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
   },
   error: function error(arg) {
-    if (global.LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
+    if (LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
   },
 };
 
-global.ex = (x) => JSON.stringify(x, null, 2);
+global.ex = function (x: any) : void {
+  JSON.stringify(x, null, 2);
+};
 
-global.errName = function (err) {
+global.errName = function (err: number): string {
   switch (err) {
     case ERR_NOT_OWNER:
       return 'ERR_NOT_OWNER';
@@ -56,7 +55,8 @@ global.errName = function (err) {
   return '';
 };
 
-//not as expected when called at the top of each loop
+/* not as expected when called at the top of each loop
 global.clearLog = function () {
   console.log("<script>angular.element(document.getElementsByClassName('fa fa-trash ng-scope')[0].parentNode).scope().Console.clear()</script>")
 };
+*/

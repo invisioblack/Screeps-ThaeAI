@@ -1,9 +1,9 @@
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/main.ts",
   output: {
-    //path: "./dist",
     filename: "./main.js",
     pathinfo: true,
+    library: 'main',
     libraryTarget: "commonjs2",
   },
 
@@ -16,5 +16,17 @@ module.exports = {
     Buffer: false,
     __filename: false,
     __dirname: false,
+  },
+
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: ['', '.js', '.ts', '.d.ts', '.tsx']
+  },
+
+  module: {
+    loaders: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      { test: /\.tsx?$/, loader: "ts-loader" }
+    ],
   }
 };

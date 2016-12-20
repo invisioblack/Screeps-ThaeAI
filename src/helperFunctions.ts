@@ -29,5 +29,3 @@ class HelperFunctions {
     return body;
   }
 }
-
-global.HelperFunctions = HelperFunctions;

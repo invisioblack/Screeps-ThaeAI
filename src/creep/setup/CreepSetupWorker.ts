@@ -1,9 +1,9 @@
 'use strict';
 
-let setup = new CreepSetupBase('worker');
+let csw = new CreepSetup('worker');
 
-setup.minRCL = 1;
-setup.RCL = {
+csw.minRCL = 1;
+csw.RCL = {
   1: {
     maxSpawned: 6,
     baseBody: [WORK, CARRY, MOVE],
@@ -70,4 +70,4 @@ setup.RCL = {
   }
 };
 
-CreepSetup['worker'] = setup;
+CreepSetup['worker'] = csw;

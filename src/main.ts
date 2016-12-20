@@ -18,16 +18,16 @@ module.exports.loop = function () {
   //every 5th tick do pop check
   if ((gTick % 5) == 0) {
     for (let r in Memory.rooms) {
-      CreepFactory.populationCheck(Game.rooms[r]);
+      CreepManager.populationCheck(Game.rooms[r]);
     }
   }
 
   //process spawn queues
   for (let r in Memory.rooms) {
-    CreepFactory.processSpawnQueue(Game.rooms[r]);
+    CreepManager.processSpawnQueue(Game.rooms[r]);
   }
 
   //processes every creep and does .act()
-  CreepFactory.doActions();
+  CreepManager.doActions();
 
 };

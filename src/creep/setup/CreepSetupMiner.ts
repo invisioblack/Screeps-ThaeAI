@@ -1,9 +1,9 @@
 'use strict';
 
-let setup = new CreepSetupBase('miner');
+let csm = new CreepSetup('miner');
 
-setup.minRCL = 3;
-setup.RCL = {
+csm.minRCL = 3;
+csm.RCL = {
   1: this.noSetup,
   2: this.noSetup,
   3: {
@@ -56,4 +56,4 @@ setup.RCL = {
   }
 };
 
-CreepSetup['miner'] = setup;
+CreepSetup['miner'] = csm;

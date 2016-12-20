@@ -1,27 +1,11 @@
 'use strict';
 
-global.CreepManager = class {
+class CreepManager {
   static doActions() {
     //iterate over creeps and load their handlers
     for (let c in Game.creeps) {
       let creep = Game.creeps[c];
       let loadedCreep = null;
-      switch (creep.memory['role']) {
-        case 'builder':
-          loadedCreep = new RoleBuilder(creep);
-          break;
-        case 'miner':
-          loadedCreep = new RoleMiner(creep);
-          break;
-        case 'repairer':
-          loadedCreep = new RoleRepairer(creep);
-          //console.log('role repair')
-          break;
-        case 'upgrader':
-          loadedCreep = new RoleUpgrader(creep);
-          break;
-      }
-
 
       //we didn't load, something went wrong
       if (loadedCreep === null)
@@ -37,7 +21,7 @@ global.CreepManager = class {
   //TODO: Shove spawn code into static class methods
   static spawn(role, spawner, maxEnergy = -1) {
     //if no sourceIndex set or is too high, set to 0
-    if ((!Memory.sourceIndex) || (Memory.sourceIndex >= Game.spawns.Spawn1.room.find(FIND_SOURCES).length))
+    if ((!Memory.sourceIndex) || (Memory.sourceIndex >= Game.spawns['Spawn1'].room.find(FIND_SOURCES).length))
       Memory.sourceIndex = 0;
     let room = spawner.room;
     if (maxEnergy < 0)
@@ -58,19 +42,7 @@ global.CreepManager = class {
 
     //creep init
     switch (role) {
-      case 'builder':
-        break;
-      case 'miner':
-        let sID = RoleMiner.findUnusedSourceID(room);
-        if (!sID)
-          log.error('No sID found, why create a miner?');
-        body = RoleMiner.generateBody();
-        mem = RoleMiner.generateMemory(sID);
-        break;
-      case 'repairer':
-        break;
-      case 'upgrader':
-        break;
+
     }
 
     let name = role + '-' + Game.time;
@@ -103,15 +75,15 @@ global.CreepManager = class {
 
     room.memory.spawnQueue = [];
     //iterate over each role, check for num vs max, build spawn list
-    for (let role in CreepSetup.roles) {
-      let roleSetup = CreepSetup.roles[role];
+    for (let role in CreepSetups) {
+      let roleSetup = CreepSetups[role];
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
         //TODO add a check for spawns in queue, until then, wipe queue on this call
         let creepNeeded = HelperFunctions.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == role}));
         while (creepNeeded > 0) {
           //spawn queue
-          room.memory.spawnQueue.push({role: role, setup: roleSetup.RCL[rcl]});
+          room.memory.spawnQueue.push(role);
           creepNeeded--;
         }
       }
@@ -120,9 +92,9 @@ global.CreepManager = class {
 
   static processSpawnQueue(room) {
     let arr = room.memory.spawnQueue;
-    let q = _.sortBy(arr, a => -a.setup.weight);
+    let q = _.sortBy(arr, function(a : any) { return -a.weight; });
     while (q.length > 0) {
       log.log(q.length + ' ' + q.pop().role)
     }
   }
-};
+}
