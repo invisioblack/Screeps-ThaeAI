@@ -1,5 +1,5 @@
 'use strict';
-import {CreepSetup} from './CreepSetupBase';
+import {CreepSetup} from './base';
 
 let setup = new CreepSetup('carrier');
 

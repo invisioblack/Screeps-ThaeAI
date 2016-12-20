@@ -1,5 +1,7 @@
 'use strict';
 
+global.CreepSetups = {};
+
 //globals credit of semperrabbit and warinternal
 global.LOGGING_ENABLED = true;
 global.log = {
@@ -54,9 +56,3 @@ global.errName = function (err: number): string {
   }
   return '';
 };
-
-/* not as expected when called at the top of each loop
-global.clearLog = function () {
-  console.log("<script>angular.element(document.getElementsByClassName('fa fa-trash ng-scope')[0].parentNode).scope().Console.clear()</script>")
-};
-*/

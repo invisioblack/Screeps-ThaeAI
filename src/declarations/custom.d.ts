@@ -6,7 +6,7 @@ declare let log: any;
 declare function ex(x: any) : void;
 declare function errName(err: number) : string;
 
-declare let CreepSetups: CreepSetup;
+declare let CreepSetups: CreepSetup[];
 
 
 //prototypes
@@ -33,6 +33,19 @@ interface RoomObject {
 
 interface RoomPosition {
   isOccupied(): boolean;
+}
+
+//managers
+declare class MemoryManager {
+  static buildRoomMemory(): void;
+  static garbageCollection(): void;
+}
+
+declare class CreepManager {
+  static doActions(): void;
+  static spawn(role: any, spawner: any, maxEnergy?: number): void;
+  static populationCheck(room: any): void;
+  static processSpawnQueue(room: any): void;
 }
 
 

@@ -1,6 +1,6 @@
 "use strict";
 
-class MemoryManager {
+export class MemoryManager {
   //TODO make this usable every loop to update new rooms I own? Or add a new function add a new room to memory
   static buildRoomMemory() {
     if (!Memory.rooms)
@@ -38,7 +38,7 @@ class MemoryManager {
       if (!Game.creeps[c])
         delete Memory.creeps[c];
     }
-    //removes .miner from source memory if that creep is dead
+    //removes miner from source memory if that creep is dead
     //allows a new one to take over
     for (let c in Memory.sources) {
       if (!Game.creeps[Memory.sources[c].miner])

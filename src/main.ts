@@ -1,6 +1,9 @@
 'use strict';
 
-import './requires';
+import './setupGlobals';
+
+import {MemoryManager} from './managers/MemoryManager';
+import {CreepManager} from './managers/CreepManager';
 
 module.exports.loop = function () {
   let gTick = Game.time;

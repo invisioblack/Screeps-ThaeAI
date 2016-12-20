@@ -1,6 +1,6 @@
 'use strict';
 
-class CreepManager {
+export class CreepManager {
   static doActions() {
     //iterate over creeps and load their handlers
     for (let c in Game.creeps) {

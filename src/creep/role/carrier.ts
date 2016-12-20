@@ -1,5 +1,5 @@
 'use strict';
-import {RoleBase} from './CreepRoleBase';
+import {RoleBase} from './base';
 
 export class RoleCarrier extends RoleBase {
   constructor(creep: Creep) {
