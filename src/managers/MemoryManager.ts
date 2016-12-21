@@ -1,22 +1,31 @@
 "use strict";
 
+/**
+ * MemoryManager
+ *  Static class to manage various Memory functions
+ */
 export class MemoryManager {
-  //TODO make this usable every loop to update new rooms I own? Or add a new function add a new room to memory
-  static buildRoomMemory() {
+
+  /**
+   * Generates the Memory.rooms object
+   * @param refresh if true, will force a regeneration of Memory.rooms
+   */
+  static buildRoomMemory(refresh: boolean = false) {
     if (!Memory.rooms)
       Memory.rooms = {};
 
     for (let r in Game.rooms) {
       let room = Game.rooms[r];
-      if (room.find(FIND_MY_STRUCTURES).length > 0) {
+      if (room.controller.my) {
         //this is my room, now do stuff
-        //it doesn't exist yet
-        if (Memory.rooms[r] == undefined) {
+        //it doesn't exist yet or we are forcing a regen
+        if (Memory.rooms[r] == undefined || refresh) {
           let mem : any = {};
 
           mem.sources = [];
           for (let s of room.find<Source>(FIND_SOURCES)) {
             mem.sources.push(s.id);
+            log.log(s.id);
           }
 
           mem.spawns = [];
@@ -26,29 +35,27 @@ export class MemoryManager {
 
           mem.spawnQueue = [];
 
+          if (refresh)
+            delete Memory.rooms[r];
           Memory.rooms[r] = mem;
         }
       }
     }
   }
 
-  //TODO iterate over rooms memory and clear out ones that i don't own
+  /**
+   * Removes stale Memory entries
+   */
   static garbageCollection() {
     for (let c in Memory.creeps) {
       if (!Game.creeps[c])
         delete Memory.creeps[c];
     }
-    //removes miner from source memory if that creep is dead
-    //allows a new one to take over
-    for (let c in Memory.sources) {
-      if (!Game.creeps[Memory.sources[c].miner])
-        delete Memory.sources[c].miner;
-    }
 
-    //if the Memory.room doesn't exist in my rooms, delete it.
-    //later may need to save rooms, for now leave as is
+    //if not a room I control, remove it
+    //eventually need to maintain memory of rooms i reserved, etc
     for (let r in Memory.rooms) {
-      if (!_.find(Game.rooms, (o) => o.name == r))
+      if (!Game.rooms[r].controller.my)
         delete Memory.rooms[r];
     }
   }

@@ -1,17 +1,31 @@
 'use strict';
 
-//import any file that edits globals
+/**
+ * All the global.stuff
+ */
 import './globals';
 
-//Prototype changes
+/**
+ * Prototype changes
+ */
 import './prototypes/Creep';
 import './prototypes/RoomObject';
 import './prototypes/RoomPosition';
 import './prototypes/Source';
 import './prototypes/Structure';
 
-//creep setups
-import './creep/setup/base';
+/**
+ * Creep Setups
+ *  Each file, when imported, will add itself to the global list CreepSetups
+ */
 import './creep/setup/carrier';
 import './creep/setup/miner';
 import './creep/setup/worker';
+
+/**
+ * Creep Roles
+ *  Each file, when imported, will add itself to the global list CreepRoles
+ */
+import './creep/role/carrier';
+import './creep/role/miner';
+import './creep/role/worker';

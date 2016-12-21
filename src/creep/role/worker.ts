@@ -1,6 +1,6 @@
 'use strict';
 
-export class RoleMiner implements CreepRole {
+export class RoleWorker implements CreepRole {
   //main action function of the role
   act(): void {
 
@@ -12,3 +12,5 @@ export class RoleMiner implements CreepRole {
   }
 
 }
+
+CreepRoles['worker'] = new RoleWorker();

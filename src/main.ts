@@ -14,7 +14,7 @@ module.exports.loop = function () {
 
   //check and build Memory.room every 10 ticks
   if ((gTick % 10) == 0)
-    MemoryManager.buildRoomMemory();
+    MemoryManager.buildRoomMemory((gTick % 100) == 0);
 
   //TODO room manager?
 

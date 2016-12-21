@@ -1,27 +1,46 @@
 'use strict';
 
+/**
+ *  Global Creep lists, Setups, Roles, Actions
+ */
 global.CreepSetups = {};
+global.CreepRoles = {};
 
-//globals credit of semperrabbit and warinternal
-global.LOGGING_ENABLED = true;
-global.JSON_STRINGIFY_EXPANDED = false;
-
+/**
+ * Logging functions
+ *  prints a string to the console, differing colors
+ */
 global.log = {
+  LOG_ENABLED : true,
+  WARN_ENABLED : true,
+  ERROR_ENABLED : true,
   log: function log(arg: string) {
-    if (LOGGING_ENABLED)return console.log(arg)
+    if (this.LOG_ENABLED)return console.log(arg)
   },
   warn: function warn(arg: string) {
-    if (LOGGING_ENABLED)return console.log('<span style=color:#FFBF3F>' + arg + '</span>');
+    if (this.WARN_ENABLED)return console.log('<span style=color:#FFBF3F>' + arg + '</span>');
   },
   err: function err(arg: string) {
-    if (LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
+    if (this.ERROR_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
   }
 };
 
+/**
+ * JSON.stringify wrapper
+ *  JSON_STRINGIFY_EXPANDED if true will make the returned string multiline
+ * @param x object to turn into a string
+ * @returns {string} object as a string
+ */
+global.JSON_STRINGIFY_EXPANDED = false;
 global.ex = function (x: any) : string {
     return JSON.stringify(x, null, JSON_STRINGIFY_EXPANDED ? 1 : 0);
 };
 
+/**
+ * Converts an error code into a string equivalent
+ * @param err ERR_* constant number value
+ * @returns {string} string version of the ERR_* constant
+ */
 global.errName = function (err: number): string {
   switch (err) {
     case ERR_NOT_OWNER:
@@ -55,3 +74,5 @@ global.errName = function (err: number): string {
   }
   return '';
 };
+
+//many of these credit of semperrabbit and warinternal
