@@ -2,7 +2,7 @@
 
 export class HelperFunctions {
 
-  static objOrFunc(obj, param) {
+  static objOrFunc(obj: any, param: any) {
     if (obj == null)
       return null;
     if (typeof obj === 'function')
@@ -18,7 +18,7 @@ export class HelperFunctions {
   }
 
   // create a balanced body as big as possible with the given energy
-  static getBalancedBody(energy){
+  static getBalancedBody(energy: number){
     const numberOfParts = Math.floor(energy / 200);
     let body = [];
     for (let i = 0; i < numberOfParts; i++) {

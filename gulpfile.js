@@ -4,14 +4,10 @@ const del = require('del');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const gulpDotFlatten = require('./libs/gulp-dot-flatten.js');
-const ts = require('gulp-typescript');
-const tsProject = ts.createProject('tsconfig.json', { typescript: require('typescript') });
-const webpack = require('webpack-stream');
+const merge = require('merge2');
+const tsProject = require('gulp-typescript').createProject('tsconfig.json');
 
-/********/
-/* INIT */
-/********/
-
+//Init
 let config;
 
 try {
@@ -24,7 +20,6 @@ try {
   }
   process.exit();
 }
-
 
 if (!config.targets) {
   gutil.log(gutil.colors.red('ERROR'), 'Invalid "config.json" file: cannot find build targets');
@@ -49,55 +44,40 @@ if (gutil.env.target) {
   gutil.log('Using default build target', gutil.colors.magenta(config.defaultTarget));
 }
 
-const buildTarget = gutil.env.target || config.defaultTarget;
-const buildConfig = config.targets[buildTarget];
+const buildConfig = config.targets[gutil.env.target || config.defaultTarget];
 
-/*********/
-/* TASKS */
-/*********/
-
-
-
+//Tasks
 gulp.task('clean', function () {
-  return del(['dist/tmp/*', 'dist/' + buildConfig + '/*', config.localPath + '/' + buildConfig + '/*'], { force: true }).then(paths => {
+  return del(['dist/dts/*', 'dist/tmp/*', 'dist/' + buildConfig + '/*', config.localPath + '/' + buildConfig + '/*'], {force: true}).then(paths => {
     gutil.log('Files and folders that would be deleted:\n\t', gutil.colors.magenta(paths.join('\n\t')));
   });
 });
 
-gulp.task('compile', ['clean'], function bundle() {
-  const webpackConfig = require('./webpack.config.js');
-  return gulp.src('src/main.ts')
-    .pipe(webpack(webpackConfig))
-    .pipe(gulp.dest('dist/' + buildConfig));
+gulp.task('compile', ['clean'], function () {
+  let res = tsProject.src().pipe(tsProject());
+  return merge([
+    res.dts.pipe(gulp.dest('dist/dts')),
+    res.js.pipe(gulp.dest('dist/tmp'))
+  ]);
 });
 
-gulp.task('ts-compile', ['clean'], function tsc() {
-  global.compileFailed = false;
-  return tsProject.src()
-    .pipe(tsProject())
-    .js.pipe(gulp.dest('dist/tmp'));
+gulp.task('flatten', ['compile'], function () {
+  return gulp.src('dist/tmp/**/*.js').pipe(gulpDotFlatten(0)).pipe(gulp.dest('dist/' + buildConfig));
 });
 
-gulp.task('compile-flat', ['ts-compile'],
-  function flatten() {
-    return gulp.src('dist/tmp/**/*.js')
-      .pipe(gulpDotFlatten(0))
-      .pipe(gulp.dest('dist/' + buildConfig));
-});
-
-gulp.task('copy-flat', ['compile-flat'], function() {
+gulp.task('copy', ['flatten'], function compile() {
   return gulp.src('dist/' + buildConfig + '/*')
     .pipe(gulp.dest(config.localPath + '/' + buildConfig));
 });
 
-gulp.task('copy', ['compile'], function() {
-  return gulp.src('dist/' + buildConfig + '/*')
-    .pipe(gulp.dest(config.localPath + '/' + buildConfig));
+gulp.task('build', ['copy'], function buildDone(done) {
+  gutil.log(gutil.colors.green('Build done'));
+  return done();
 });
 
 gulp.task('watch', function () {
-  gulp.watch('src/**/*.ts', ['copy-flat'])
-    .on('all', function(event, path, stats) {
+  gulp.watch('src/**/*.ts', ['build'])
+    .on('all', function (event, path, stats) {
       console.log('');
       gutil.log(gutil.colors.green('File ' + path + ' was ' + event + 'ed, running tasks...'));
     })
@@ -106,21 +86,4 @@ gulp.task('watch', function () {
     });
 });
 
-gulp.task('build-flat', ['copy-flat'], function buildDone(done) {
-  gutil.log(gutil.colors.green('Build done'));
-  return done();
-});
-
-gulp.task('build', ['copy'], function buildDone(done) {
-  gutil.log(gutil.colors.green('Build done'));
-  return done();
-});
-
 gulp.task('default', ['watch']);
-
-//webpacked
-//build -> copy -> compile -> clean
-
-//flattened
-//build-flat -> copy-flat -> compile-flat -> ts-compile -> clean
-//watch -> copy-flat -> compile-flat -> ts-compile -> clean

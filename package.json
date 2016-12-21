@@ -4,12 +4,10 @@
   "description": "AI for MMO programming game Screeps",
   "main": "./dist/ThaeAI/main.js",
   "scripts": {
-    "deploy": "gulp build-flat",
-    "deploy-bundled": "gulp build",
+    "deploy": "gulp build",
     "deploy-prod": "gulp build --target prod",
     "watch": "gulp watch",
-    "watch-prod": "gulp watch --target prod",
-    "dts-files": "tsc -d"
+    "watch-prod": "gulp watch --target prod"
   },
   "repository": {
     "type": "git",
@@ -25,13 +23,10 @@
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.3",
     "gulp-util": "^3.0.7",
+    "merge2": "^1.0.2",
+    "recast": "^0.11.18",
     "ts-loader": "^1.3.3",
-    "typescript": "^2.1.4",
-    "webpack": "^1.14.0",
-    "webpack-stream": "^3.2.0"
-  },
-  "devDependencies": {
-    "recast": "^0.11.18"
+    "typescript": "^2.1.4"
   },
   "keywords": [],
   "license": "ISC"

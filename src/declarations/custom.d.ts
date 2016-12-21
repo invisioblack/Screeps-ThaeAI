@@ -7,7 +7,8 @@ declare let log: any;
 declare function ex(x: any) : string;
 declare function errName(err: number) : string;
 
-declare let CreepSetups: CreepSetup[];
+declare let CreepSetups: CreepSetupArr;
+
 
 
 //prototypes
@@ -40,6 +41,14 @@ interface RoomPosition {
   isOccupied(): boolean;
 }
 
+interface Source {
+  memory: any;
+}
+
+interface Structure {
+  memory: any;
+}
+
 //managers
 declare class MemoryManager {
   static buildRoomMemory(): void;
@@ -60,11 +69,24 @@ declare class HelperFunctions {
 }
 
 //creeps
+interface CreepSetupArr {
+  [key: string] : CreepSetup;
+}
+
+interface CreepRCLSetup {
+  maxSpawned: number | ((room: Room)=>number);
+  baseBody: string[];
+  multiBody: string[];
+  maxMulti: number;
+  minEnergy: number;
+  weight: number;
+}
+
 declare class CreepSetup {
   role: string;
   minRCL: number;
-  noSetup: any;
-  RCL: any;
+  noSetup: CreepRCLSetup;
+  RCL: CreepRCLSetup[];
   constructor(role: string);
 }
 

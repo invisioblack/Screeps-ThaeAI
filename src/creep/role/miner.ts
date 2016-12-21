@@ -24,11 +24,11 @@ export class RoleMiner extends RoleBase {
     }
   }
 
-  static findUnusedSourceID(room) {
-    return room.find(FIND_SOURCES, {filter: (s) => !s.memory.miner})[0].id;
+  static findUnusedSourceID(room: Room) {
+    return room.find<Source>(FIND_SOURCES, {filter: (s: Source) => !s.memory.miner})[0].id;
   }
 
-  static setSourceMiner(sID, creep) {
+  static setSourceMiner(sID: number, creep: Creep) {
     Memory.sources[sID].miner = creep;
   }
 }

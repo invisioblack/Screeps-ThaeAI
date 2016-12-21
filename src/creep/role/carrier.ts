@@ -28,12 +28,12 @@ export class RoleCarrier extends RoleBase {
     //Perform work functions. These functions should be overridden in sub role
     if (working) {
       //full, should be moving to a dump
-      let site = this.creep.pos.findClosestByRange<Structure>(FIND_MY_STRUCTURES, {
-        filter: (s) => (
+      let site = this.creep.pos.findClosestByRange<OwnedStructure>(FIND_MY_STRUCTURES, {
+        filter: (s : OwnedStructure) => (
         s.structureType == STRUCTURE_SPAWN ||
         s.structureType == STRUCTURE_EXTENSION ||
         s.structureType == STRUCTURE_TOWER)
-        && s.energy < s.energyCapacity
+        //&& s.energy < s.energyCapacity
       });
 
       if (site != null) {

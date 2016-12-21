@@ -13,16 +13,16 @@ export class CreepManager {
         return;
 
       //builds the creep memory and runs its act() function
-      loadedCreep.act();
+      //loadedCreep.act();
     }
   }
 
 
-  static spawn(role, room) : boolean {
+  static spawn(role : any, room: Room) : boolean {
     let maxEnergy = room.energyCapacityAvailable;
-    let spawner = null;
+    let spawner : Spawn = null;
 
-    for (let s of room.find(FIND_MY_SPAWNS)){
+    for (let s of room.find<Spawn>(FIND_MY_SPAWNS)){
       if (!s.spawning)
         spawner = s;
     }
@@ -48,7 +48,7 @@ export class CreepManager {
 
 
   //Uses passed room object to check for mim pop and adds missing creeps to the spawn queue
-  static populationCheck(room) {
+  static populationCheck(room: Room) {
     let rcl = room.controller.level;
 
     //wipe spawn queue for now
@@ -64,7 +64,7 @@ export class CreepManager {
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
         //TODO add a check for spawns in queue, until then, wipe queue on this call
-        let creepNeeded = hf.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == role}));
+        let creepNeeded = hf.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}));
         while (creepNeeded > 0) {
           //spawn queue
           room.memory.spawnQueue.push(roleSetup.RCL[rcl]);
@@ -74,7 +74,7 @@ export class CreepManager {
     }
   }
 
-  static processSpawnQueue(room) {
+  static processSpawnQueue(room: Room) {
     let arr = room.memory.spawnQueue;
     if (!arr || arr.length < 1)
       return;

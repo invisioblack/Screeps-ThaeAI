@@ -7,13 +7,13 @@ global.LOGGING_ENABLED = true;
 global.JSON_STRINGIFY_EXPANDED = false;
 
 global.log = {
-  log: function log(arg) {
+  log: function log(arg: string) {
     if (LOGGING_ENABLED)return console.log(arg)
   },
-  warn: function warn(arg) {
+  warn: function warn(arg: string) {
     if (LOGGING_ENABLED)return console.log('<span style=color:#FFBF3F>' + arg + '</span>');
   },
-  err: function err(arg) {
+  err: function err(arg: string) {
     if (LOGGING_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
   }
 };
