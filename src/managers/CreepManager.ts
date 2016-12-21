@@ -63,7 +63,7 @@ export class CreepManager {
       name:       name,
       target:     null,
       role:       role.role,
-      action:     ''
+      action:     null
     };
 
     //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body

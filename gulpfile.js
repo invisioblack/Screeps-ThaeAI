@@ -48,9 +48,7 @@ const buildConfig = config.targets[gutil.env.target || config.defaultTarget];
 
 //Tasks
 gulp.task('clean', function () {
-  return del(['dist/dts/*', 'dist/tmp/*', 'dist/' + buildConfig + '/*', config.localPath + '/' + buildConfig + '/*'], {force: true}).then(paths => {
-    gutil.log('Files and folders that would be deleted:\n\t', gutil.colors.magenta(paths.join('\n\t')));
-  });
+  return del(['dist/dts/*', 'dist/tmp/*', 'dist/' + buildConfig + '/*', config.localPath + '/' + buildConfig + '/*'], {force: true});
 });
 
 gulp.task('compile', ['clean'], function () {
@@ -65,13 +63,13 @@ gulp.task('flatten', ['compile'], function () {
   return gulp.src('dist/tmp/**/*.js').pipe(gulpDotFlatten(0)).pipe(gulp.dest('dist/' + buildConfig));
 });
 
-gulp.task('copy', ['flatten'], function compile() {
+gulp.task('copy', ['flatten'], function () {
   return gulp.src('dist/' + buildConfig + '/*')
     .pipe(gulp.dest(config.localPath + '/' + buildConfig));
 });
 
-gulp.task('build', ['copy'], function buildDone(done) {
-  gutil.log(gutil.colors.green('Build done'));
+gulp.task('build', ['copy'], function (done) {
+  //post build processing here
   return done();
 });
 
