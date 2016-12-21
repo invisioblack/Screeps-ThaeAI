@@ -28,7 +28,7 @@ global.log = {
 
 /**
  * JSON.stringify wrapper
- *  JSON_STRINGIFY_EXPANDED if true will make the returned string multiline
+ *  JSON_STRINGIFY_EXPANDED if true will make the returned string multi line
  * @param x object to turn into a string
  * @returns {string} object as a string
  */

@@ -2,7 +2,7 @@
 
 /**
  * Wrapper for lookAtArea to look in range of an object. Credit: warinternal
- * @param asArray return the reults as an array or not
+ * @param asArray return the results as an array or not
  * @param range range to look, defaults to one
  * @returns {LookAtResultMatrix|LookAtResultWithPos[]}
  */
@@ -18,7 +18,7 @@ RoomObject.prototype.lookNear = function(asArray: boolean, range: number = 1): L
 /**
  * Wrapper for lookForAtArea to look in range of an object. Credit: warinternal
  * @param lookFor Object searching for
- * @param asArray return reulsts as array or not
+ * @param asArray return results as array or not
  * @param range range to look. defaults to one
  * @returns {LookAtResultMatrix|LookAtResultWithPos[]}
  */

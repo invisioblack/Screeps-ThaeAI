@@ -44,7 +44,7 @@ interface Memory {
 interface RoomObject {
   /**
    * Wrapper for lookAtArea to look in range of an object. Credit: warinternal
-   * @param asArray return the reults as an array or not
+   * @param asArray return the results as an array or not
    * @param range range to look, defaults to one
    * @returns {LookAtResultMatrix|LookAtResultWithPos[]}
    */
@@ -52,7 +52,7 @@ interface RoomObject {
   /**
    * Wrapper for lookForAtArea to look in range of an object. Credit: warinternal
    * @param lookFor Object searching for
-   * @param asArray return reulsts as array or not
+   * @param asArray return results as array or not
    * @param range range to look. defaults to one
    * @returns {LookAtResultMatrix|LookAtResultWithPos[]}
    */
@@ -248,10 +248,21 @@ declare abstract class CreepAction {
   name: string;
   target: string;
   range: number;
+  constructor(name: string);
   abstract assign(creep: Creep, target?: string) : boolean;
   abstract isValidAction(creep: Creep): boolean;
   abstract isValidTarget(creep: Creep, target: string): boolean;
   step(creep: Creep): void;
-  abstract work(creep: Creep): void;
+  abstract work(creep: Creep): number;
 }
+
+declare class CreepActionIdle extends CreepAction {
+  constructor();
+  assign(creep: Creep, target?: string) : boolean;
+  isValidAction(creep: Creep): boolean;
+  isValidTarget(creep: Creep, target: string): boolean;
+  work(creep: Creep): number;
+}
+
+
 //endregion
