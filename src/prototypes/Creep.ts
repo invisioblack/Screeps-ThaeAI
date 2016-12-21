@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Get the quantity of live body parts of the given type. Fully damaged parts do not count. Optimized by
+ * Get the quantity of live body parts of the given type. Fully damaged parts do not count. Optimized version. Credit:
  * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
  */
-Creep.prototype.getActiveBodyparts = function (type: string) {
+Creep.prototype.getActiveBodyparts = function (type: string): number {
   let count = 0;
   for (let i = this.body.length; i-- > 0;) {
     if (this.body[i].hits > 0) {
@@ -17,10 +17,10 @@ Creep.prototype.getActiveBodyparts = function (type: string) {
 };
 
 /**
- * Gets whether or not a live body part exists. Fully damaged parts do not count. Written by
+ * Gets whether or not a live body part exists. Fully damaged parts do not count. Credit:
  * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
  */
-Creep.prototype.hasActiveBodyparts = function (type: string) {
+Creep.prototype.hasActiveBodyparts = function (type: string): boolean {
   for (let i = this.body.length; i-- > 0;) {
     if (this.body[i].hits > 0) {
       if (this.body[i].type === type) {

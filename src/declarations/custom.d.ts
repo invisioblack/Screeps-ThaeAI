@@ -13,12 +13,12 @@ declare let CreepRoles: {[key: string]: CreepRole};
 //region Prototypes
 interface Creep {
   /**
-   * Get the quantity of live body parts of the given type. Fully damaged parts do not count. Optimized by
+   * Get the quantity of live body parts of the given type. Fully damaged parts do not count. Optimized version. Credit:
    * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
    */
   getActiveBodyparts(type: string): number;
   /**
-   * Gets whether or not a live body part exists. Fully damaged parts do not count. Written by
+   * Gets whether or not a live body part exists. Fully damaged parts do not count. Credit:
    * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
    */
   hasActiveBodyparts(type: string): boolean;
@@ -42,14 +42,14 @@ interface Memory {
 
 interface RoomObject {
   /**
-   * Wrapper for lookAtArea to look in range of an object
+   * Wrapper for lookAtArea to look in range of an object. Credit: warinternal
    * @param asArray return the reults as an array or not
    * @param range range to look, defaults to one
    * @returns {LookAtResultMatrix|LookAtResultWithPos[]}
    */
   lookNear(asArray: boolean, range?: number):  LookAtResultMatrix | LookAtResultWithPos[];
   /**
-   * Wrapper for lookForAtArea to look in range of an object
+   * Wrapper for lookForAtArea to look in range of an object. Credit: warinternal
    * @param lookFor Object searching for
    * @param asArray return reulsts as array or not
    * @param range range to look. defaults to one
@@ -60,7 +60,7 @@ interface RoomObject {
 
 interface RoomPosition {
   /**
-   * Is a location occupied by a creep
+   * Is a location occupied by a creep. Credit:
    */
   isOccupied: boolean;
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Is a location occupied by a creep
+ * Is a location occupied by a creep. Credit:
  */
 Object.defineProperty(RoomPosition.prototype, "isOccupied", {
   enumerable: true,
