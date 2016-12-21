@@ -3,4 +3,3 @@ node_modules/
 dist/
 stuff
 config.json
-npm-debug.log

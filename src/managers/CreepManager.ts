@@ -63,7 +63,6 @@ export class CreepManager {
 
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
-        //TODO add a check for spawns in queue, until then, wipe queue on this call
         let creepNeeded = hf.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}));
         while (creepNeeded > 0) {
           //spawn queue
@@ -83,6 +82,7 @@ export class CreepManager {
     while (!done) {
       let tmp = q.shift();
       if (tmp) {
+        //only attempt first in queue, if not possible, quit
         if (!CreepManager.spawn(tmp, room))
         {
           q.unshift(tmp);

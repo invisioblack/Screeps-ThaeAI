@@ -1,12 +1,12 @@
 'use strict';
 
 export class HelperFunctions {
-
-  static objOrFunc(obj: any, param: any) {
+  //used for creep setup which passes a number or a function and room, will always return a number
+  static objOrFunc(obj: number | ((room: Room)=>number), room: Room): number {
     if (obj == null)
-      return null;
+      return -1;
     if (typeof obj === 'function')
-      return obj(param);
+      return obj(room);
     else
       return obj;
   }
@@ -18,7 +18,7 @@ export class HelperFunctions {
   }
 
   // create a balanced body as big as possible with the given energy
-  static getBalancedBody(energy: number){
+  static getBalancedBody(energy: number): string[] {
     const numberOfParts = Math.floor(energy / 200);
     let body = [];
     for (let i = 0; i < numberOfParts; i++) {

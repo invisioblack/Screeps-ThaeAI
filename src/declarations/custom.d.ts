@@ -7,8 +7,7 @@ declare let log: any;
 declare function ex(x: any) : string;
 declare function errName(err: number) : string;
 
-declare let CreepSetups: CreepSetupArr;
-
+declare let CreepSetups: {[key: string]: CreepSetup};
 
 
 //prototypes
@@ -57,36 +56,33 @@ declare class MemoryManager {
 
 declare class CreepManager {
   static doActions(): void;
-  static spawn(role: any, room: Room): boolean;
   static populationCheck(room: any): void;
   static processSpawnQueue(room: any): void;
+  static spawn(role: any, room: Room): boolean;
 }
 
 declare class HelperFunctions {
-  static objOrFunc(obj: any, param: any): any;
+  static getBalancedBody(energy: number): string[];
   static massSuicide(): void;
-  static getBalancedBody(energy: any): any[];
+  static objOrFunc(obj: number | ((room: Room)=>number), room: Room): number;
 }
 
 //creeps
-interface CreepSetupArr {
-  [key: string] : CreepSetup;
-}
 
 interface CreepRCLSetup {
-  maxSpawned: number | ((room: Room)=>number);
   baseBody: string[];
-  multiBody: string[];
-  maxMulti: number;
+  maxMulti: number | ((room: Room)=>number);
+  maxSpawned: number | ((room: Room)=>number);
   minEnergy: number;
-  weight: number;
+  multiBody: string[];
+  weight: number | ((room: Room)=>number);
 }
 
 declare class CreepSetup {
-  role: string;
   minRCL: number;
   noSetup: CreepRCLSetup;
-  RCL: CreepRCLSetup[];
+  RCL: { [key: number] : CreepRCLSetup };
+  role: string;
   constructor(role: string);
 }
 
@@ -94,11 +90,11 @@ declare class CreepSetup {
 declare class RoleBase {
   protected creep: Creep;
   constructor(creep: Creep);
-  remember(key: string, value?: any): any;
-  forget(key: string): void;
   act(): void;
-  doWork(): void;
   doNonWork(): void;
+  doWork(): void;
+  forget(key: string): void;
+  remember(key: string, value?: any): any;
 }
 
 declare class RoleCarrier extends RoleBase {

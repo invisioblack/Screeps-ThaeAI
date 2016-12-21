@@ -4,7 +4,7 @@ export class CreepSetup {
   role: string;
   minRCL: number;
   noSetup: CreepRCLSetup;
-  RCL: CreepRCLSetup[];
+  RCL: { [key: number] : CreepRCLSetup };
 
   constructor(role: string) {
     this.role = role;
@@ -19,16 +19,15 @@ export class CreepSetup {
       weight: 0
     };
 
-    this.RCL = [
-      this.noSetup,
-      this.noSetup,
-      this.noSetup,
-      this.noSetup,
-      this.noSetup,
-      this.noSetup,
-      this.noSetup,
-      this.noSetup,
-      this.noSetup
-    ];
+    this.RCL = {
+      1: this.noSetup,
+      2: this.noSetup,
+      3: this.noSetup,
+      4: this.noSetup,
+      5: this.noSetup,
+      6: this.noSetup,
+      7: this.noSetup,
+      8: this.noSetup
+    };
   }
 }
