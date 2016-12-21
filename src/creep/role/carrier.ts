@@ -1,14 +1,13 @@
 'use strict';
 
-export class RoleCarrier implements CreepRole {
-  //main action function of the role
-  act(): void {
+import {CreepRole} from './base';
 
-  }
+export class CreepRoleCarrier extends CreepRole {
 
-  //decide next action
-  nextAction(): void {
-
+  constructor() {
+    super('carrier');
   }
 
 }
+
+CreepRoles['carrier'] = new CreepRoleCarrier();

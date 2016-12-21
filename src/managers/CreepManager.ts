@@ -24,7 +24,7 @@ export class CreepManager {
           return;
         }
 
-        role.act();
+        role.act(creep);
       }
     }
   }

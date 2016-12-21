@@ -5,6 +5,7 @@
  */
 global.CreepSetups = {};
 global.CreepRoles = {};
+global.CreepActions = {};
 
 /**
  * Logging functions

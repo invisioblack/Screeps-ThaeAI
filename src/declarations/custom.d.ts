@@ -8,6 +8,7 @@ declare function errName(err: number) : string;
 
 declare let CreepSetups: {[key: string]: CreepSetup};
 declare let CreepRoles: {[key: string]: CreepRole};
+declare let CreepActions: {[key: string]: CreepAction};
 
 
 //region Prototypes
@@ -229,23 +230,28 @@ declare class CreepSetup {
 //endregion
 
 //region Roles
-interface CreepRole {
-  act(): void; //perform action
-  nextAction(): void; //decides what to do next
+declare class CreepRole {
+  name: string;
+  constructor(name: string);
+  act(creep: Creep): void; //perform action
+  nextAction(creep: Creep): CreepAction; //decides what to do next
 }
 
-declare class RoleCarrier implements CreepRole {
-  act(): void; //perform action
-  nextAction(): void; //decides what to do next
+declare class CreepRoleWorker extends CreepRole {
+  constructor();
+  nextAction(creep: Creep): CreepAction; //decides what to do next
 }
+//endregion
 
-declare class RoleMiner implements CreepRole {
-  act(): void; //perform action
-  nextAction(): void; //decides what to do next
-}
-
-declare class RoleWorker implements CreepRole {
-  act(): void; //perform action
-  nextAction(): void; //decides what to do next
+//region Actions
+declare abstract class CreepAction {
+  name: string;
+  target: string;
+  range: number;
+  abstract assign(creep: Creep, target?: string) : boolean;
+  abstract isValidAction(creep: Creep): boolean;
+  abstract isValidTarget(creep: Creep, target: string): boolean;
+  step(creep: Creep): void;
+  abstract work(creep: Creep): void;
 }
 //endregion

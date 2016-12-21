@@ -1,14 +1,13 @@
 'use strict';
 
-export class RoleMiner implements CreepRole {
-  //main action function of the role
-  act(): void {
+import {CreepRole} from './base';
 
-  }
+export class CreepRoleMiner extends CreepRole {
 
-  //decide next action
-  nextAction(): void {
-
+  constructor() {
+    super('miner');
   }
 
 }
+
+CreepRoles['miner'] = new CreepRoleMiner();
