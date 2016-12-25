@@ -14,6 +14,10 @@ declare let CreepActions: {[key: string]: CreepAction};
 //region Prototypes
 interface Creep {
   /**
+   * Sum of all the things a crepe is carrying Credit: https://github.com/ScreepsOCS/screeps.behaviour-action-pattern/blob/dev/creep.js
+   */
+  sum: number;
+  /**
    * Get the quantity of live body parts of the given type. Fully damaged parts do not count. Optimized version. Credit:
    * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
    */
@@ -244,15 +248,66 @@ declare class CreepRoleWorker extends CreepRole {
 //endregion
 
 //region Actions
+/**
+ * CreepAction
+ *  Base Action class
+ */
 declare abstract class CreepAction {
+  /**
+   * String name of the action
+   */
   name: string;
+  /**
+   * String ID of the target object
+   */
   target: string;
+  /**
+   * Maximum range at which action can occur
+   */
   range: number;
+  /**
+   * Constructor
+   * @param name string name of action
+   */
   constructor(name: string);
-  abstract assign(creep: Creep, target?: string) : boolean;
+  /**
+   * Assigns the action to the creep
+   * @param creep target creep
+   * @param target target id string
+   * @return {boolean} whether or not assignment succeeded
+   */
+  abstract assign(creep: Creep, target?: string): boolean;
+  /**
+   * Checks whether or not the creep is allowed to do this action
+   * @param creep target creep
+   * @return {boolean} whether or action is allowed
+   */
   abstract isValidAction(creep: Creep): boolean;
+  /**
+   * Checks whether or not the supplied target is valid for this action and creep
+   *  Performs type validation for target type here
+   * @param creep target creep
+   * @param target target object
+   * @return {boolean} whether or not target is allowed
+   */
   abstract isValidTarget(creep: Creep, target: string): boolean;
+  /**
+   * Gets a new target for the action.
+   * @param creep
+   * @return {string} String ID of new object
+   */
+  abstract newTarget(creep: Creep): string;
+  /**
+   * Performs the next step required for this action, be it drive or work
+   * If work fails, get a new action
+   * @param creep target creep
+   */
   step(creep: Creep): void;
+  /**
+   * Performs the work action of this creep
+   * @param creep
+   * @return {number} ERR_* code of work status
+   */
   abstract work(creep: Creep): number;
 }
 
@@ -261,6 +316,7 @@ declare class CreepActionIdle extends CreepAction {
   assign(creep: Creep, target?: string) : boolean;
   isValidAction(creep: Creep): boolean;
   isValidTarget(creep: Creep, target: string): boolean;
+  newTarget(creep: Creep): string;
   work(creep: Creep): number;
 }
 

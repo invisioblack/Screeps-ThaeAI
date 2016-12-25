@@ -55,7 +55,7 @@ global.errName = function (err: number): string {
     case ERR_NOT_FOUND:
       return 'ERR_NOT_FOUND';
     case ERR_NOT_ENOUGH_RESOURCES:
-      return 'ERR_NOT_ENOUGH_ENERGY/ERR_NOT_ENOUGH_RESOURCES/ERR_NOT_ENOUGH_EXTENSIONS';
+      return 'ERR_NOT_ENOUGH_RESOURCES';
     case ERR_INVALID_TARGET:
       return 'ERR_INVALID_TARGET';
     case ERR_FULL:

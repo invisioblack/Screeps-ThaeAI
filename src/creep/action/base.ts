@@ -52,6 +52,13 @@ export abstract class CreepAction {
   abstract isValidTarget(creep: Creep, target: string): boolean;
 
   /**
+   * Gets a new target for the action.
+   * @param creep
+   * @return {string} String ID of new object
+   */
+  abstract newTarget(creep: Creep): string;
+
+  /**
    * Performs the next step required for this action, be it drive or work
    * If work fails, get a new action
    * @param creep target creep

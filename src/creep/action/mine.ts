@@ -2,10 +2,10 @@
 
 import {CreepAction} from './base';
 
-export class CreepActionIdle extends CreepAction {
+export class CreepActionMine extends CreepAction {
 
   constructor() {
-    super('idle');
+    super('mine');
   }
 
   assign(creep: Creep, target?: string) : boolean {
@@ -13,7 +13,7 @@ export class CreepActionIdle extends CreepAction {
   }
 
   isValidAction(creep: Creep): boolean {
-    return true;
+    return ((creep.carryCapacity > creep.sum));
   }
 
   isValidTarget(creep: Creep, target: string): boolean {
@@ -29,4 +29,4 @@ export class CreepActionIdle extends CreepAction {
   }
 }
 
-CreepActions['idle'] = new CreepActionIdle();
+CreepActions['mine'] = new CreepActionMine();
