@@ -31,15 +31,15 @@ export class CreepManager {
 
   /**
    * Spawns a creep in the chosen Room based on provided CreepSetup object
-   * @param role  CreepSetup object to generate a creep from
+   * @param setup  CreepSetup object to generate a creep from
    * @param room  Room object to spawn the creep in
    * @returns {boolean} whether or not the spawn was successful
    */
-  static spawn(role : CreepSetup, room: Room) : boolean {
+  static spawn(setup : CreepSetup, room: Room) : boolean {
     let maxEnergy = room.energyCapacityAvailable;
     let energyAvailable = room.energyAvailable;
     let spawner : Spawn = null;
-    let rclSetup = role.RCL[room.controller.level];
+    let rclSetup = setup.RCL[room.controller.level];
 
     //cant even spawn with min body size
     if (maxEnergy < rclSetup.minEnergy || rclSetup.minEnergy > energyAvailable)
@@ -56,19 +56,19 @@ export class CreepManager {
 
     //able to try and spawn now, generate parts needed to spawn
     let maxMult = CreepSetup.objOrFunc(rclSetup.maxMulti, room);
-    let name = role.role + '-' + Game.time;
+    let name = setup.role + '-' + Game.time;
     let body: string[] = rclSetup.baseBody;
     let mem: any = {
       spawnRoom:  room.name,
       name:       name,
       target:     null,
-      role:       role.role,
+      role:       setup.role,
       action:     null
     };
 
-    //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body
+    //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body, not exceeding maxMult
     if (maxMult > 0)
-      maxMult = Math.floor((energyAvailable - CreepSetup.getBodyCost(body)) / CreepSetup.getBodyCost(rclSetup.multiBody));
+      maxMult = Math.min(Math.floor((energyAvailable - CreepSetup.getBodyCost(body)) / CreepSetup.getBodyCost(rclSetup.multiBody)), maxMult);
 
     while (maxMult > 0) {
       maxMult--;

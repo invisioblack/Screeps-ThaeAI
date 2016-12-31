@@ -22,7 +22,7 @@ RoomObject.prototype.lookNear = function(asArray: boolean, range: number = 1): L
  * @param range range to look. defaults to one
  * @returns {LookAtResultMatrix|LookAtResultWithPos[]}
  */
-RoomObject.prototype.lookForNear = function(lookFor: string, asArray: boolean, range: number = 1): LookAtResultMatrix | LookAtResultWithPos[] {
+RoomObject.prototype.lookForNear = function(lookFor: string, asArray: boolean = false, range: number = 1): LookAtResultMatrix | LookAtResultWithPos[] {
   let {x,y} = this.pos;
   return this.room.lookForAtArea(lookFor,
     Math.max(0, y-range),

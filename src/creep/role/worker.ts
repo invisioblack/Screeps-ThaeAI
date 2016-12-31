@@ -45,6 +45,7 @@ export class CreepRoleWorker extends CreepRole {
         return act;
     }
 
+    //none of the listed actions are valid...
     return super.nextAction(creep);
   }
 }

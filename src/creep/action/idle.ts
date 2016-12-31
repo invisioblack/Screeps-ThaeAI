@@ -9,6 +9,7 @@ export class CreepActionIdle extends CreepAction {
   }
 
   assign(creep: Creep, target?: string) : boolean {
+    creep.memory.action = this;
     return true;
   }
 

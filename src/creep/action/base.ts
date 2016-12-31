@@ -10,10 +10,6 @@ export abstract class CreepAction {
    */
   name: string;
   /**
-   * String ID of the target object
-   */
-  target: string;
-  /**
    * Maximum range at which action can occur
    */
   range: number;
@@ -24,7 +20,6 @@ export abstract class CreepAction {
    */
   constructor (name: string) {
     this.name = name;
-    this.target = null;
     this.range = 0;
   }
 

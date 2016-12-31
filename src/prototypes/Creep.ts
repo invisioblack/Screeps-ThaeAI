@@ -33,18 +33,15 @@ Creep.prototype.hasActiveBodyparts = function (type: string): boolean {
   return false;
 };
 
-/**
- * Sum of all the things a crepe is carrying Credit: https://github.com/ScreepsOCS/screeps.behaviour-action-pattern/blob/dev/creep.js
- * Caches until the next tick
- */
-Object.defineProperty(Creep.prototype, 'sum', {
+Object.defineProperty(Creep.prototype, 'carrySum', {
   configurable: true,
   get: function() {
-    if( _.isUndefined(this._sum) || this._sumSet != Game.time ) {
-      this._sumSet = Game.time;
-      this._sum = _.sum(this.carry);
+    let ret = 0;
+    if (_.isUndefined(this._carrySum)) {
+      ret = _.sum(this.carry);
+    } else {
+      ret = this._carrySum;
     }
-    return this._sum;
+    return ret;
   }
 });
-

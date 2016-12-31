@@ -29,3 +29,10 @@ import './creep/setup/worker';
 import './creep/role/carrier';
 import './creep/role/miner';
 import './creep/role/worker';
+
+/**
+ * Creep Actions
+ */
+import './creep/action/base'
+import './creep/action/idle'
+import './creep/action/mine'

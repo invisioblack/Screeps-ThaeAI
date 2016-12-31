@@ -14,10 +14,6 @@ declare let CreepActions: {[key: string]: CreepAction};
 //region Prototypes
 interface Creep {
   /**
-   * Sum of all the things a crepe is carrying Credit: https://github.com/ScreepsOCS/screeps.behaviour-action-pattern/blob/dev/creep.js
-   */
-  sum: number;
-  /**
    * Get the quantity of live body parts of the given type. Fully damaged parts do not count. Optimized version. Credit:
    * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
    */
@@ -27,6 +23,12 @@ interface Creep {
    * @param type A body part type, one of the following body part constants: MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, TOUGH, CLAIM
    */
   hasActiveBodyparts(type: string): boolean;
+
+  /**
+   * Sum of all resources on the creep, cached per tick
+   */
+  carrySum: number;
+  _carrySum: number;
 }
 
 interface Memory {
@@ -44,6 +46,13 @@ interface Memory {
   };
 }
 
+interface Room {
+  /**
+   * Total energy mineable from all sources in this room, this tick. Cached per tick
+   */
+  mineableEnergy: number;
+  _mineableEnergy: number;
+}
 
 interface RoomObject {
   /**
@@ -65,7 +74,7 @@ interface RoomObject {
 
 interface RoomPosition {
   /**
-   * Is a location occupied by a creep. Credit:
+   * Is a location occupied by a creep. Credit: proximo
    */
   isOccupied: boolean;
 }
@@ -75,6 +84,14 @@ interface Source {
    * Provision for Source memory
    */
   memory: any;
+  /**
+   * Number of open fields around the source that cane be used to mine. I.E. max miners. Stored in memory
+   */
+  usableFields: number;
+  /**
+   * Number of fields available with no miner in them
+   */
+  openFields: number;
 }
 
 interface Structure {
@@ -130,6 +147,20 @@ declare class CreepManager {
    */
   static processSpawnQueue(room: Room): void;
 }
+
+/**
+ * RoomManager
+ *  Static class that handles all of the rooms each tick
+ */
+declare class RoomManager {
+  /**
+   * Caches the amount of mineable energy in all the sources that have energy left
+   * @param room Room to check
+   * @returns {number} energy
+   */
+  static mineableEnergy(room: Room): number;
+}
+
 
 /**
  * HelperFunctions
@@ -257,10 +288,6 @@ declare abstract class CreepAction {
    * String name of the action
    */
   name: string;
-  /**
-   * String ID of the target object
-   */
-  target: string;
   /**
    * Maximum range at which action can occur
    */
