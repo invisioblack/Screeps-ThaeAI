@@ -16,7 +16,7 @@ export class MemoryManager {
 
     for (let r in Game.rooms) {
       let room = Game.rooms[r];
-      if (room.controller.my) {
+      if (room.controller && room.controller.my) {
         //this is my room, now do stuff
         //it doesn't exist yet or we are forcing a regen
         if (Memory.rooms[r] == undefined || refresh) {
@@ -55,7 +55,7 @@ export class MemoryManager {
     //if not a room I control, remove it
     //eventually need to maintain memory of rooms i reserved, etc
     for (let r in Memory.rooms) {
-      if (!Game.rooms[r].controller.my)
+      if (!Game.rooms[r])
         delete Memory.rooms[r];
     }
   }

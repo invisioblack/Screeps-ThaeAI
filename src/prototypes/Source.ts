@@ -20,9 +20,9 @@ Object.defineProperty(Source.prototype, "memory", {
 
 Object.defineProperty(Source.prototype, "usableFields", {
   get: function (): number {
-    let ret;
+    let ret = 0;
     if (_.isUndefined(this.memory.usableFields)) {
-      let walls = _.countBy(this.room.lookForNear(LOOK_TERRAIN, true), 'structure')['wall'];
+      let walls = _.countBy(this.lookForNear(LOOK_TERRAIN, true), 'structure')['wall'];
       ret = 9 - walls;
       this.memory.usableFields = ret;
     } else {
@@ -40,7 +40,7 @@ Object.defineProperty(Source.prototype, "minerCount", {
     if (_.isUndefined(this.memory.minerCount)) {
       this.memory.minerCount = ret;
     } else {
-      ret = this.memory.usableFields;
+      ret = this.memory.minerCount;
     }
     return ret;
   },

@@ -9,6 +9,7 @@ import './globals';
  * Prototype changes
  */
 import './prototypes/Creep';
+import './prototypes/Room';
 import './prototypes/RoomObject';
 import './prototypes/RoomPosition';
 import './prototypes/Source';

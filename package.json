@@ -8,7 +8,8 @@
     "deploy-prod": "gulp build --target prod",
     "deploy-private": "gulp build --server private",
     "watch": "gulp watch",
-    "watch-prod": "gulp watch --target prod"
+    "watch-prod": "gulp watch --target prod",
+    "watch-private": "gulp watch --server private"
   },
   "repository": {
     "type": "git",
