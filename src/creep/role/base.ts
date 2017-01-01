@@ -25,13 +25,11 @@ export class CreepRole  {
    * @param creep Creep performing this role
    */
   act(creep: Creep): void {
-    let action = creep.memory.action;
+    let action = CreepActions[creep.memory.action];
     //Had no valid action
-    log.log(ex(action));
     if (!action) {
-      this.nextAction(creep);
+      action = this.nextAction(creep);
     }
-    log.log(ex(action));
     //idle or invalid action, get a new one
     if (action && (!action.isValidAction(creep) || action.name == 'idle'))
       action = this.nextAction(creep);

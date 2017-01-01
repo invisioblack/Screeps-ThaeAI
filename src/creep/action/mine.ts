@@ -10,12 +10,14 @@ export class CreepActionMine extends CreepAction {
 
   assign(creep: Creep, target?: string) : boolean {
     let ret = false;
+   //log.log(this.name)
     if (this.isValidAction(creep)) {
+     // log.log('is valid')
       if (!this.isValidTarget(creep, target)) {
         target = this.newTarget(creep);
       }
       if (target != '') {
-        Game.getObjectById<Source>(target).memory.minerCount++;
+        Game.getObjectById<Source>(target).minerCount++;
         creep.memory.action = this.name;
         ret = true;
       }
@@ -26,6 +28,7 @@ export class CreepActionMine extends CreepAction {
   }
 
   isValidAction(creep: Creep): boolean {
+    //log.log(creep.room)
     return ((creep.carryCapacity > creep.carrySum) && creep.room.mineableEnergy > 0);
   }
 
@@ -39,12 +42,19 @@ export class CreepActionMine extends CreepAction {
 
   newTarget(creep: Creep): string {
     let ret = '';
-    let room = creep.room;
     //decrement miner count if we have an old target
+    //TODO what if the old target isnt a source object?
     if (creep.memory.target != '')
-      Memory.sources[creep.memory.target].minerCount--;
+      Game.getObjectById<Source>(creep.memory.target).minerCount--;
 
-
+    for (let s of creep.room.memory.sources) {
+      let src = Game.getObjectById<Source>(s);
+      if (src.usableFields > Memory.sources[s].minerCount) {
+        ret = s;
+        break;
+        //found one, break to save cpu
+      }
+    }
 
     return ret;
   }

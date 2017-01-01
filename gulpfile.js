@@ -21,6 +21,11 @@ try {
   process.exit();
 }
 
+if (!config.localPath) {
+  gutil.log(gutil.colors.red('ERROR'), 'Invalid "config.json" file: cannot find local deployment path');
+  process.exit();
+}
+
 if (!config.targets) {
   gutil.log(gutil.colors.red('ERROR'), 'Invalid "config.json" file: cannot find build targets');
   process.exit();
@@ -28,6 +33,11 @@ if (!config.targets) {
 
 if (!config.defaultTarget || !config.targets[config.defaultTarget]) {
   gutil.log(gutil.colors.red('ERROR'), 'Invalid "config.json" file: cannot find default build target');
+  process.exit();
+}
+
+if (!config.servers) {
+  gutil.log(gutil.colors.red('ERROR'), 'Invalid "config.json" file: cannot find servers');
   process.exit();
 }
 
@@ -45,10 +55,11 @@ if (gutil.env.target) {
 }
 
 const buildConfig = config.targets[gutil.env.target || config.defaultTarget];
+const tarPath = config.localPath + (config.servers[gutil.env.server] || (buildConfig.live ? config.servers.live : config.servers.private));
 
 //Tasks
 gulp.task('clean', function () {
-  return del(['dist/dts/*', 'dist/tmp/*', 'dist/' + buildConfig + '/*', config.localPath + '/' + buildConfig + '/*'], {force: true});
+  return del(['dist/dts/*', 'dist/tmp/*', 'dist/' + buildConfig.name + '/*', tarPath + '/' + buildConfig.name + '/*'], {force: true});
 });
 
 gulp.task('compile', ['clean'], function () {
@@ -60,12 +71,12 @@ gulp.task('compile', ['clean'], function () {
 });
 
 gulp.task('flatten', ['compile'], function () {
-  return gulp.src('dist/tmp/**/*.js').pipe(gulpDotFlatten(0)).pipe(gulp.dest('dist/' + buildConfig));
+  return gulp.src('dist/tmp/**/*.js').pipe(gulpDotFlatten(0)).pipe(gulp.dest('dist/' + buildConfig.name));
 });
 
 gulp.task('copy', ['flatten'], function () {
-  return gulp.src('dist/' + buildConfig + '/*')
-    .pipe(gulp.dest(config.localPath + '/' + buildConfig));
+  return gulp.src('dist/' + buildConfig.name + '/*')
+    .pipe(gulp.dest(tarPath + '/' + buildConfig.name));
 });
 
 gulp.task('build', ['copy'], function (done) {

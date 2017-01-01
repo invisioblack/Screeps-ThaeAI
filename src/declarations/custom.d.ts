@@ -88,10 +88,7 @@ interface Source {
    * Number of open fields around the source that cane be used to mine. I.E. max miners. Stored in memory
    */
   usableFields: number;
-  /**
-   * Number of fields available with no miner in them
-   */
-  openFields: number;
+  minerCount: number;
 }
 
 interface Structure {

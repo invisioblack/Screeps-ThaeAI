@@ -41,8 +41,12 @@ export class CreepRoleWorker extends CreepRole {
 
     for (let a of priority) {
       let act = CreepActions[a];
-      if (act.isValidAction(creep) && act.assign(creep))
+
+      if (act.assign(creep)) {
+        //log.log('assigned action: ' + act.name)
         return act;
+      }
+
     }
 
     //none of the listed actions are valid...

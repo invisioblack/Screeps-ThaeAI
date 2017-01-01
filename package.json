@@ -6,6 +6,7 @@
   "scripts": {
     "deploy": "gulp build",
     "deploy-prod": "gulp build --target prod",
+    "deploy-private": "gulp build --server private",
     "watch": "gulp watch",
     "watch-prod": "gulp watch --target prod"
   },

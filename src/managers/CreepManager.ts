@@ -61,9 +61,9 @@ export class CreepManager {
     let mem: any = {
       spawnRoom:  room.name,
       name:       name,
-      target:     null,
+      target:     '',
       role:       setup.role,
-      action:     null
+      action:     'idle'
     };
 
     //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body, not exceeding maxMult

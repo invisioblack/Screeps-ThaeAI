@@ -33,9 +33,19 @@ Object.defineProperty(Source.prototype, "usableFields", {
   configurable: true,
 });
 
-Object.defineProperty(Source.prototype, "openFields", {
+
+Object.defineProperty(Source.prototype, "minerCount", {
   get: function (): number {
-    return this.usableFields - this.memory.minerCount;
+    let ret = 0;
+    if (_.isUndefined(this.memory.minerCount)) {
+      this.memory.minerCount = ret;
+    } else {
+      ret = this.memory.usableFields;
+    }
+    return ret;
+  },
+  set: function (v): any {
+    return _.set(Memory, `sources.${this.id}.minerCount`, v);
   },
   configurable: true,
 });
