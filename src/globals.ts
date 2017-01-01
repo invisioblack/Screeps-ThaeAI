@@ -38,12 +38,9 @@ global.ex = function (x: any) : string {
 };
 
 /**
- * Wipes everything, including memory Credit: semperrabbit
+ * Wipes Memory
  */
-global.respawn = function(){
-  _.forEach(Game.flags, f => f.remove());
-  _.forEach(Game.creeps, c => c.suicide());
-  _.forEach(Game.constructionSites, s => s.remove());
+global.rm = function() {
   Memory = <any>{};
   RawMemory.set('');
 };
@@ -67,6 +64,16 @@ global.rc = function() {
  */
 global.rcs = function() {
   _.forEach(Game.constructionSites, s => s.remove());
+};
+
+/**
+ * Wipes everything, including memory
+ */
+global.respawn = function(){
+ rc();
+ rcs();
+ rf();
+ rm();
 };
 
 /**

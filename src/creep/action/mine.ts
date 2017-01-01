@@ -10,16 +10,15 @@ export class CreepActionMine extends CreepAction {
 
   assign(creep: Creep, target?: string) : boolean {
     let ret = false;
-   //log.log(this.name)
+   log.log(this.name);;;;;;;;;;;;;;;
     if (this.isValidAction(creep)) {
       if (!this.isValidTarget(creep, target)) {
-        log.log('invalid target');
         target = this.newTarget(creep);
       }
-      log.log(target);;;;;;
       if (target != '') {
-        Game.getObjectById<Source>(target).minerCount++;
+        //Game.getObjectById<Source>(target).minerCount++;
         creep.memory.action = this.name;
+        creep.memory.target = target;
         ret = true;
       }
     } else {
@@ -44,8 +43,9 @@ export class CreepActionMine extends CreepAction {
     let ret = '';
     //decrement miner count if we have an old target
     //TODO what if the old target isnt a source object?
-    if (creep.memory.target != '')
-      Game.getObjectById<Source>(creep.memory.target).minerCount--;
+    if (creep.memory.target != '') {
+      //Game.getObjectById<Source>(creep.memory.target).minerCount--;
+    }
 
     for (let s of creep.room.memory.sources) {
       let src = Game.getObjectById<Source>(s);

@@ -43,7 +43,6 @@ export class CreepRoleWorker extends CreepRole {
       let act = CreepActions[a];
 
       if (act.assign(creep)) {
-        //log.log('assigned action: ' + act.name)
         return act;
       }
 

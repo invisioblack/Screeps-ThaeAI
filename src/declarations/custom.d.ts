@@ -8,6 +8,7 @@ declare let log: any;
 declare function ex(x: any) : string;
 declare function errName(err: number) : string;
 declare function respawn(): void;
+declare function rm(): void;
 declare function rc(): void;
 declare function rf(): void;
 declare function rcs(): void;
