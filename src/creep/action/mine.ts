@@ -13,7 +13,7 @@ export class CreepActionMine extends CreepAction {
    //log.log(this.name)
     if (this.isValidAction(creep)) {
       if (!this.isValidTarget(creep, target)) {
-        log.log('invalid target');;;;;;
+        log.log('invalid target');
         target = this.newTarget(creep);
       }
       log.log(target);;;;;;
@@ -49,7 +49,6 @@ export class CreepActionMine extends CreepAction {
 
     for (let s of creep.room.memory.sources) {
       let src = Game.getObjectById<Source>(s);
-      log.log(src.usableFields);;;;;;
       if (src.usableFields > src.minerCount) {
         ret = s;
         break;

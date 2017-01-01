@@ -21,9 +21,8 @@ Object.defineProperty(Source.prototype, "memory", {
 Object.defineProperty(Source.prototype, "usableFields", {
   get: function (): number {
     let ret = 0;
-    if (_.isUndefined(this.memory.usableFields)) {
-      let walls = _.countBy(this.lookForNear(LOOK_TERRAIN, true), 'structure')['wall'];
-      ret = 9 - walls;
+    if (!this.memory.usableFields) {
+      ret = 9 - _.countBy(this.lookForNear(LOOK_TERRAIN, true), 'terrain')['wall'];
       this.memory.usableFields = ret;
     } else {
       ret = this.memory.usableFields;

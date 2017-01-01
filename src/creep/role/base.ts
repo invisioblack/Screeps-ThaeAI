@@ -34,6 +34,7 @@ export class CreepRole  {
     if (action && (!action.isValidAction(creep) || action.name == 'idle'))
       action = this.nextAction(creep);
 
+    log.log('act() ' + ex(action));;;;;;;;;;;;;;;;;;
     if (action) {
       action.step(creep);
     } else {

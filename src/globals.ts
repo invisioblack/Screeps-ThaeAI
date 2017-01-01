@@ -38,6 +38,38 @@ global.ex = function (x: any) : string {
 };
 
 /**
+ * Wipes everything, including memory Credit: semperrabbit
+ */
+global.respawn = function(){
+  _.forEach(Game.flags, f => f.remove());
+  _.forEach(Game.creeps, c => c.suicide());
+  _.forEach(Game.constructionSites, s => s.remove());
+  Memory = <any>{};
+  RawMemory.set('');
+};
+
+/**
+ * Removes all of the flags
+ */
+global.rf = function() {
+  _.forEach(Game.flags, f => f.remove());
+};
+
+/**
+ * Kills all of your creeps
+ */
+global.rc = function() {
+  _.forEach(Game.creeps, c => c.suicide());
+};
+
+/**
+ * Removes all construction sites
+ */
+global.rcs = function() {
+  _.forEach(Game.constructionSites, s => s.remove());
+};
+
+/**
  * Converts an error code into a string equivalent
  * @param err ERR_* constant number value
  * @returns {string} string version of the ERR_* constant

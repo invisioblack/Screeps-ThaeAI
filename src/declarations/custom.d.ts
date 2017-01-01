@@ -1,10 +1,16 @@
 declare let module: any;
 declare let global: any;
+declare let RawMemory: RawMemory;
 
 declare let JSON_STRINGIFY_EXPANDED: boolean;
 declare let log: any;
+//global functions/console commands
 declare function ex(x: any) : string;
 declare function errName(err: number) : string;
+declare function respawn(): void;
+declare function rc(): void;
+declare function rf(): void;
+declare function rcs(): void;
 
 declare let CreepSetups: {[key: string]: CreepSetup};
 declare let CreepRoles: {[key: string]: CreepRole};

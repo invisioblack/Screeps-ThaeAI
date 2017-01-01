@@ -60,6 +60,7 @@ export abstract class CreepAction {
    */
   step(creep: Creep): void {
     let target = Game.getObjectById<RoomObject>(creep.memory.target);
+    log.log(target);;;;;;;;;;;;;;;;;;;;;;;;;
     let rangeTo = target ? creep.pos.getRangeTo(target.pos) : 0;
     if (this.range >= rangeTo) { //rangeTo is inside of maxRange
       //work returned an error code, means we cant do it for some reason, get a new action next tick

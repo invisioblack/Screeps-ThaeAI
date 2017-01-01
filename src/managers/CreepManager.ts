@@ -21,10 +21,9 @@ export class CreepManager {
         if (!role) {
           log.err('Creep with no role, committing seppuku');
           creep.suicide();
-          return;
+        } else {
+          role.act(creep);
         }
-
-        role.act(creep);
       }
     }
   }
