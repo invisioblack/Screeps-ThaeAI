@@ -9,6 +9,11 @@ module.exports.loop = function () {
   let gTick = Game.time;
   log.log('***************NEW TICK***************' + gTick + '***************');
 
+  if(Game.cpu.bucket < 2500)
+    log.err(`bucket is at or less than 25% ${Game.cpu.bucket}`);
+  else if(Game.cpu.bucket < 5000)
+    log.warn(`bucket is at or less than 50% ${Game.cpu.bucket}`);
+
   //cleans up memory
   MemoryManager.garbageCollection();
 
