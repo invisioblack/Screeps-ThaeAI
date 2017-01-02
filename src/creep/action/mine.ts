@@ -6,6 +6,7 @@ export class CreepActionMine extends CreepAction {
 
   constructor() {
     super('mine');
+    this.range = 1;
   }
 
   assign(creep: Creep, target?: string) : boolean {
@@ -60,7 +61,7 @@ export class CreepActionMine extends CreepAction {
   }
 
   work(creep: Creep): number {
-    return OK;
+    return creep.harvest(Game.getObjectById<Source>(creep.memory.target));
   }
 }
 

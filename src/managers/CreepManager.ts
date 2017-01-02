@@ -105,7 +105,7 @@ export class CreepManager {
 
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
-        let creepNeeded = CreepSetup.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - _.sum(room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}));
+        let creepNeeded = CreepSetup.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}).length;
         while (creepNeeded > 0) {
           //spawn queue
           q.push(roleSetup);
