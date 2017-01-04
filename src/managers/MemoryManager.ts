@@ -25,7 +25,6 @@ export class MemoryManager {
           mem.sources = [];
           for (let s of room.find<Source>(FIND_SOURCES)) {
             mem.sources.push(s.id);
-            log.log(s.id);
           }
 
           mem.spawns = [];
