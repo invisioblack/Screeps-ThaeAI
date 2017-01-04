@@ -69,6 +69,11 @@ interface Room {
    */
   hasConstructionSites: boolean;
   _hasConstructionSites: boolean;
+  /**
+   * Total amount of energy dropped on the floor. Cached per tick
+   */
+  pickableEnergy: number;
+  _pickableEnergy: number;
 }
 
 interface RoomObject {

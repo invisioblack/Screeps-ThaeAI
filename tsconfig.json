@@ -14,6 +14,7 @@
     "declarationDir": "./dist/dts"
   },
   "include" : [
-    "./src/**/*"
+    "./src/**/*",
+    "./declarations/**/*"
   ]
 }

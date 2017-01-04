@@ -34,6 +34,7 @@ Object.defineProperty(Source.prototype, "usableFields", {
 
 
 //TODO memory saved miner count maybe
+//TODO if dedicated miner RoleMiner assigned, do not allow other creeps to mine, maybe another value that overrides this?
 Object.defineProperty(Source.prototype, "minerCount", {
   get: function (): number {
     let ret = 0;

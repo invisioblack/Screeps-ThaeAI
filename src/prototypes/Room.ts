@@ -46,3 +46,20 @@ Object.defineProperty(Room.prototype, 'hasConstructionSites', {
     return ret;
   }
 });
+
+Object.defineProperty(Room.prototype, 'pickableEnergy', {
+  configurable: true,
+  get: function() : number {
+    let ret = 0;
+    if (_.isUndefined(this._pickableEnergy)) {
+      for (let s of this.find(FIND_DROPPED_ENERGY, { filter : { resourceType : RESOURCE_ENERGY }})) {
+        if (s.amount > 20) //enough to matter
+          ret += s.amount;
+      }
+      this._pickableEnergy = ret;
+    } else {
+      ret = this._pickableEnergy;
+    }
+    return ret;
+  }
+});
