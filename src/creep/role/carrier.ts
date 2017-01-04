@@ -18,7 +18,7 @@ export class CreepRoleCarrier extends CreepRole {
   nextAction(creep: Creep): CreepAction {
     let priority = [
       'pickup',
-      'refill',
+      'fill',
       'idle'
     ];
 

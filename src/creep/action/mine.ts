@@ -2,6 +2,10 @@
 
 import {CreepAction} from './base';
 
+/**
+ * Action meant for workers to mine
+ * TODO write a miner specific mine action
+ */
 export class CreepActionMine extends CreepAction {
 
   constructor() {
@@ -27,7 +31,7 @@ export class CreepActionMine extends CreepAction {
   }
 
   isValidAction(creep: Creep): boolean {
-    return ((creep.carryCapacity > creep.carrySum) && creep.room.mineableEnergy > 0);
+    return ((creep.carryCapacity > creep.carrySum) && creep.room.mineableEnergy > 0) || creep.memory.role == 'miner';
   }
 
   isValidTarget(creep: Creep, target: string): boolean {

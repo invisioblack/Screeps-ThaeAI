@@ -7,7 +7,7 @@ import {CreepManager} from './managers/CreepManager';
 
 module.exports.loop = function () {
   let gTick = Game.time;
-  log.log('***************NEW TICK***************' + gTick + '***************');
+  //log.log('***************NEW TICK***************' + gTick + '***************');
 
   if(Game.cpu.bucket < 2500)
     log.err(`bucket is at or less than 25% ${Game.cpu.bucket}`);

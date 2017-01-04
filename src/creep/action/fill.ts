@@ -59,8 +59,11 @@ export class CreepActionFill extends CreepAction {
     return ret;
   }
 
+  //if the structure adding to is full, will come back not OK and then a new action is gotten, which has the carrier going and grabbing more energy...
+
   work(creep: Creep): number {
-    return creep.transfer(Game.getObjectById<StructureSpawn>(creep.memory.target), RESOURCE_ENERGY);
+    creep.transfer(Game.getObjectById<StructureSpawn>(creep.memory.target), RESOURCE_ENERGY);
+    return (this.isValidAction(creep)) ? ERR_NOT_ENOUGH_ENERGY : OK;
   }
 }
 

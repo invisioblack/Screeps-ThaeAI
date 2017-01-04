@@ -27,7 +27,7 @@ setup.RCL = {
     multiBody: [WORK, CARRY, MOVE],
     maxMulti: 2,
     minEnergy: 200,
-    weight: 500
+    weight: 999
   },
   4: {
     maxSpawned: 2,
