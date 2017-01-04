@@ -59,6 +59,16 @@ interface Room {
    */
   mineableEnergy: number;
   _mineableEnergy: number;
+  /**
+   * Total energy needed to fill all the spawns/extensions in the room. Cached per tick
+   */
+  neededSpawnEnergy: number;
+  _neededSpawnEnergy: number;
+  /**
+   * Whether or not there are constructionsites in this room. Cached per tick
+   */
+  hasConstructionSites: boolean;
+  _hasConstructionSites: boolean;
 }
 
 interface RoomObject {
@@ -95,7 +105,11 @@ interface Source {
    * Number of open fields around the source that cane be used to mine. I.E. max miners. Stored in memory
    */
   usableFields: number;
+  /**
+   * NUmber of miner actions with this source as a target. Cached per tick
+   */
   minerCount: number;
+  _minerCount: number;
 }
 
 interface Structure {

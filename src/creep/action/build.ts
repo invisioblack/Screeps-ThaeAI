@@ -2,11 +2,11 @@
 
 import {CreepAction} from './base';
 
-export class CreepActionMine extends CreepAction {
+export class CreepActionBuild extends CreepAction {
 
   constructor() {
-    super('mine');
-    this.range = 1;
+    super('build');
+    this.range = 3;
   }
 
   assign(creep: Creep, target?: string) : boolean {
@@ -27,35 +27,27 @@ export class CreepActionMine extends CreepAction {
   }
 
   isValidAction(creep: Creep): boolean {
-    return ((creep.carryCapacity > creep.carrySum) && creep.room.mineableEnergy > 0);
+    return creep.carry.energy > 0 && creep.room.hasConstructionSites;
   }
 
   isValidTarget(creep: Creep, target: string): boolean {
-    let src = Game.getObjectById<Source>(target);
-    let ret = false;
-    if (src != null)
-      ret = src.energy > 0;
-    return ret;
+    return Game.getObjectById<ConstructionSite>(target) != null;
   }
 
   newTarget(creep: Creep): string {
+    let places = creep.room.find<ConstructionSite>(FIND_MY_CONSTRUCTION_SITES);
     let ret = '';
 
-    for (let s of creep.room.memory.sources) {
-      let src = Game.getObjectById<Source>(s);
-      if (src.usableFields > src.minerCount) {
-        ret = s;
-        break;
-        //found one, break to save cpu
-      }
-    }
+    //TODO pick closest site
+    if (places.length > 0)
+      ret = places[0].id;
 
     return ret;
   }
 
   work(creep: Creep): number {
-    return creep.harvest(Game.getObjectById<Source>(creep.memory.target));
+    return creep.build(Game.getObjectById<ConstructionSite>(creep.memory.target));
   }
 }
 
-CreepActions['mine'] = new CreepActionMine();
+CreepActions['build'] = new CreepActionBuild();

@@ -35,5 +35,7 @@ import './creep/role/worker';
  * Creep Actions
  */
 import './creep/action/base'
+import './creep/action/build'
+import './creep/action/fill'
 import './creep/action/idle'
 import './creep/action/mine'

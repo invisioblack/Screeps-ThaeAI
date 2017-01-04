@@ -33,18 +33,17 @@ Object.defineProperty(Source.prototype, "usableFields", {
 });
 
 
+//TODO memory saved miner count maybe
 Object.defineProperty(Source.prototype, "minerCount", {
   get: function (): number {
     let ret = 0;
-    if (_.isUndefined(this.memory.minerCount)) {
-      this.memory.minerCount = ret;
+    if (_.isUndefined(this._minerCount)) {
+      ret = this.room.find(FIND_MY_CREEPS, { filter : (c : Creep) => c.memory.target == this.id && c.memory.action == 'mine'}).length;
+      this._minerCount = ret;
     } else {
-      ret = this.memory.minerCount;
+      ret = this._minerCount;
     }
     return ret;
-  },
-  set: function (v): any {
-    return _.set(Memory, `sources.${this.id}.minerCount`, v);
   },
   configurable: true,
 });
