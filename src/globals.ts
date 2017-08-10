@@ -8,11 +8,21 @@ global.CreepRoles = {};
 global.CreepActions = {};
 
 /**
+ * Global Settings
+ */
+
+//Individual creep singing
+global.CREEP_SINGING = true;
+//singing on a roomwide scale
+global.ROOM_SINGING = false;
+
+
+/**
  * Logging functions
  *  prints a string to the console, differing colors
  */
 global.log = {
-  LOG_ENABLED : true,
+  LOG_ENABLED : false,
   WARN_ENABLED : true,
   ERROR_ENABLED : true,
   DEBUG_ENABLED : false,

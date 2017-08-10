@@ -63,7 +63,7 @@ export class CreepManager {
       target:     '',
       role:       setup.role,
       action:     'idle',
-      singing:    'This|is|the|song|that|never|ends|A|few|creeps|started|singing|it|not|knowing|what|it|was|They\'re|singing|forever|and|ever|for|the|reason|just|beacuse'
+      singing:    'This|is|the|song|that|never|ends|It|goes|on|and|on|my|friends|A|few|creeps|started|singing|it|not|knowing|what|it|was|They\'re|singing|forever|and|ever|for|the|reason|just|because'
     };
 
     //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body, not exceeding maxMult

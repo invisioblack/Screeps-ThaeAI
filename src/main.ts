@@ -39,9 +39,15 @@ module.exports.loop = function () {
   //processes every creep and does .act()
   CreepManager.doActions();
 
-  /*
+
   //singing!
   for (let r in Memory.rooms) {
-    Game.rooms[r].sing("1|2|3");
-  }*/
+    if (ROOM_SINGING)
+      Game.rooms[r].sing("1|2|3");
+
+    let os : OwnedStructure[] = Game.rooms[r].find<OwnedStructure>(FIND_MY_STRUCTURES);
+    for (let s in os) {
+      //new RoomVisual(r).text(s.structureType, s.pos.x+1, s.pos.y);
+    }
+  }
 };

@@ -72,7 +72,7 @@ export abstract class CreepAction {
     //TODO pathfinding!
     //only move if there is a target and its range is > 1
     if (target && rangeTo > 1)
-      creep.moveTo(target.pos);
+      creep.moveTo(target.pos, {visualizePathStyle : {}});
 
   }
 

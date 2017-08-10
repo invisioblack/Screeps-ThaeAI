@@ -3,6 +3,9 @@ declare let global: any;
 
 declare let JSON_STRINGIFY_EXPANDED: boolean;
 declare let log: any;
+declare let CREEP_SINGING: boolean;
+declare let ROOM_SINGING: boolean;
+
 //global functions/console commands
 declare function ex(x: any) : string;
 declare function errName(err: number) : string;
