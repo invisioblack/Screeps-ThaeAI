@@ -7,7 +7,8 @@ import {CreepManager} from './managers/CreepManager';
 
 module.exports.loop = function () {
   let gTick = Game.time;
-  //log.log('***************NEW TICK***************' + gTick + '***************');
+  log.DEBUG_ENABLED = true;
+  log.debug('***************NEW TICK***************' + gTick + '***************');
 
   if(Game.cpu.bucket < 2500)
     log.err(`bucket is at or less than 25% ${Game.cpu.bucket}`);
@@ -38,4 +39,9 @@ module.exports.loop = function () {
   //processes every creep and does .act()
   CreepManager.doActions();
 
+  /*
+  //singing!
+  for (let r in Memory.rooms) {
+    Game.rooms[r].sing("1|2|3");
+  }*/
 };

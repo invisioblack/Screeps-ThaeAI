@@ -63,3 +63,16 @@ Object.defineProperty(Room.prototype, 'pickableEnergy', {
     return ret;
   }
 });
+
+
+Room.prototype.sing = function(sentence: string, pub = true): void{
+  let words = sentence.split("|");
+  let creeps = _.filter(Game.creeps, (c) => c.room.name == this.name);
+  creeps = _.sortBy(creeps, function(c){return (c.pos.x + (c.pos.y*50))});
+
+  let i = 0;
+  while(i < creeps.length){
+    creeps[i].say(words[i % words.length], pub);
+    i++;
+  }
+};

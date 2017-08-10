@@ -1,8 +1,18 @@
 {
   "localPath": "SCREEPS_PATH_HERE",
+  "servers" : {
+    "live" : "screeps.com",
+    "private" : "PRIVATE_SERVER_SUB_DIRECTORY"
+  },
   "defaultTarget": "dev",
   "targets": {
-    "dev": "ThaeAI-dev",
-    "prod": "ThaeAI"
+    "dev": {
+      "name" : "NAME-dev",
+      "live" : true
+    },
+    "prod": {
+      "name" : "NAME",
+      "live" : true
+    }
   }
 }

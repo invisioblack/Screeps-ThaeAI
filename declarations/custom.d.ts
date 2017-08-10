@@ -1,6 +1,5 @@
 declare let module: any;
 declare let global: any;
-declare let RawMemory: RawMemory;
 
 declare let JSON_STRINGIFY_EXPANDED: boolean;
 declare let log: any;
@@ -32,6 +31,13 @@ interface Creep {
   hasActiveBodyparts(type: string): boolean;
 
   /**
+   * Creep sings the given sentence, delimited by |
+   * @param {string} sentence sentence to sing
+   * @param {boolean} pub sing it publicly
+   */
+  sing(sentence: string, pub?: boolean): void;
+
+  /**
    * Sum of all resources on the creep, cached per tick
    */
   carrySum: number;
@@ -54,6 +60,14 @@ interface Memory {
 }
 
 interface Room {
+
+  /**
+   * All creeps in the room sing the given sentence, delimited by |
+   * @param {string} sentence sentence to sing
+   * @param {boolean} pub sing it publicly
+   */
+  sing(sentence: string, pub?: boolean): void;
+
   /**
    * Total energy mineable from all sources in this room, this tick. Cached per tick
    */
@@ -111,10 +125,9 @@ interface Source {
    */
   usableFields: number;
   /**
-   * NUmber of miner actions with this source as a target. Cached per tick
+   * Number of miner actions with this source as a target.
    */
   minerCount: number;
-  _minerCount: number;
 }
 
 interface Structure {
@@ -262,6 +275,14 @@ declare class CreepSetup {
    * @param role name of the Setup
    */
   constructor(role: string);
+
+  /**
+   * Returns the max allowed to spawn in a specified room
+   * @param {number} rcl Room Control Level
+   * @param {Room} room room to check for
+   * @returns {number} number allowed to be spawned
+   */
+  getMaxSpawnable(rcl: number, room: Room): number;
 
   /**
    * Used in the CreepSetup objects to determine various number values based on provided room conditions

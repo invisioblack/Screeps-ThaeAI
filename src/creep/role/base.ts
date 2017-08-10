@@ -36,6 +36,7 @@ export class CreepRole  {
 
     if (action) {
       action.step(creep);
+      creep.sing(creep.memory.singing);
     } else {
       log.err('Creep without an action: ' + creep.name + ' : ' + ex(creep.memory));
     }

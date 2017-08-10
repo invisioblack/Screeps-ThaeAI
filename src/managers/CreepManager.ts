@@ -62,7 +62,8 @@ export class CreepManager {
       name:       name,
       target:     '',
       role:       setup.role,
-      action:     'idle'
+      action:     'idle',
+      singing:    'This|is|the|song|that|never|ends|A|few|creeps|started|singing|it|not|knowing|what|it|was|They\'re|singing|forever|and|ever|for|the|reason|just|beacuse'
     };
 
     //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body, not exceeding maxMult
@@ -77,7 +78,7 @@ export class CreepManager {
     //we have memory, a body, and a name. Checked for energy, try and spawn it now
     if (spawner.canCreateCreep(body, name) === OK) {
       spawner.createCreep(body, name, mem);
-      log.log("Spawned: " + name + ' PartsUsed: ' + body.join() + ' Memory: ' + ex(mem));
+      log.debug("Spawned: " + name + ' PartsUsed: ' + body.join() + ' Memory: ' + ex(mem));
       return true;
     }
     return false;
@@ -105,7 +106,7 @@ export class CreepManager {
 
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
-        let creepNeeded = CreepSetup.objOrFunc(roleSetup.RCL[rcl].maxSpawned, room) - room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}).length;
+        let creepNeeded = roleSetup.getMaxSpawnable(rcl, room) - room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}).length;
         while (creepNeeded > 0) {
           //spawn queue
           q.push(roleSetup);
@@ -116,9 +117,6 @@ export class CreepManager {
           room.memory.spawnQueue = _.sortBy(q, function(a : CreepSetup) { return -a.RCL[rcl].weight; });
       }
     }
-
-
-
   }
 
   /**
@@ -134,8 +132,7 @@ export class CreepManager {
       let tmp: CreepSetup = q.shift();
       if (tmp) {
         //if unable to spawn, were either out of energy, or no more spawns free
-        if (!CreepManager.spawn(tmp, room))
-        {
+        if (!CreepManager.spawn(tmp, room)) {
           q.unshift(tmp);
           done = true;
         }

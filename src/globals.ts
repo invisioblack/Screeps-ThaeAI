@@ -15,6 +15,10 @@ global.log = {
   LOG_ENABLED : true,
   WARN_ENABLED : true,
   ERROR_ENABLED : true,
+  DEBUG_ENABLED : false,
+  debug: function log(arg: string) {
+    if (this.DEBUG_ENABLED)return console.log('<span style=color:#00c6d1>' + arg + '</span>')
+  },
   log: function log(arg: string) {
     if (this.LOG_ENABLED)return console.log(arg)
   },

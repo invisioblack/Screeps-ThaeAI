@@ -51,6 +51,10 @@ export class CreepSetup {
     };
   }
 
+  getMaxSpawnable(rcl: number, room: Room) : number {
+    return CreepSetup.objOrFunc(this.RCL[rcl].maxSpawned, room)
+  }
+
   /**
    * Used in the CreepSetup objects to determine various number values based on provided room conditions
    * @param obj Either a number or a function that will return a number
