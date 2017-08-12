@@ -287,19 +287,17 @@ declare class CreepSetup {
 
   /**
    * Returns the max allowed to spawn in a specified room
-   * @param {number} rcl Room Control Level
    * @param {Room} room room to check for
    * @returns {number} number allowed to be spawned
    */
-  getMaxSpawnable(rcl: number, room: Room): number;
+  getMaxSpawnable(room: Room): number;
 
   /**
    * Returns the max multiplier for the extended creep bodies in a specified room
-   * @param {number} rcl Room Control Level
    * @param {Room} room room to check for
    * @returns {number} max multiple
    */
-  getMaxMulti(rcl: number, room: Room): number;
+  getMaxMulti(room: Room): number;
 
   /**
    * Used in the CreepSetup objects to determine various number values based on provided room conditions

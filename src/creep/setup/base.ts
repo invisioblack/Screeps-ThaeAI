@@ -53,22 +53,20 @@ export class CreepSetup {
 
   /**
    * Returns the max multiplier for the extended creep bodies in a specified room
-   * @param {number} rcl Room Control Level
    * @param {Room} room room to check for
    * @returns {number} max multiple
    */
-  getMaxSpawnable(rcl: number, room: Room) : number {
-    return CreepSetup.objOrFunc(this.RCL[rcl].maxSpawned, room)
+  getMaxSpawnable(room: Room) : number {
+    return CreepSetup.objOrFunc(this.RCL[room.controller.level].maxSpawned, room);
   }
 
   /**
    * Returns the max multiplier for the extended creep bodies in a specified room
-   * @param {number} rcl Room Control Level
    * @param {Room} room room to check for
    * @returns {number} max multiple
    */
-  getMaxMulti(rcl: number, room: Room) : number {
-    return CreepSetup.objOrFunc(this.RCL[rcl].maxMulti, room)
+  getMaxMulti(room: Room) : number {
+    return CreepSetup.objOrFunc(this.RCL[room.controller.level].maxMulti, room);
   }
 
   /**
@@ -77,7 +75,7 @@ export class CreepSetup {
    * @param room Optional: room in which to use in determining the number to return
    * @returns {any}
    */
-  static objOrFunc(obj: number | ((room: Room)=>number), room?: Room): number {
+  protected static objOrFunc(obj: number | ((room: Room) => number), room?: Room): number {
     if (obj == null)
       return -1;
     if (typeof obj === 'function')

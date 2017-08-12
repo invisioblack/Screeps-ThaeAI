@@ -1,5 +1,5 @@
 'use strict';
-//import {HelperFunctions} from '../helperFunctions'
+
 import {CreepSetup} from '../creep/setup/base'
 
 /**
@@ -54,7 +54,7 @@ export class CreepManager {
       return false;
 
     //able to try and spawn now, generate parts needed to spawn
-    let maxMult = CreepSetup.objOrFunc(rclSetup.maxMulti, room);
+    let maxMult = setup.getMaxMulti(room);
     let name = setup.role + '-' + Game.time;
     let body: string[] = rclSetup.baseBody;
     let mem: any = {
@@ -72,7 +72,7 @@ export class CreepManager {
 
     while (maxMult > 0) {
       maxMult--;
-      body.concat(rclSetup.multiBody);
+      body = body.concat(rclSetup.multiBody);
     }
 
     //not enough energy to make the maxed out body
@@ -114,7 +114,7 @@ export class CreepManager {
 
       //is the rcl high enough for this creep
       if (rcl >= roleSetup.minRCL) {
-        let creepNeeded = roleSetup.getMaxSpawnable(rcl, room) - room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}).length;
+        let creepNeeded = roleSetup.getMaxSpawnable(room) - room.find(FIND_MY_CREEPS, {filter: (c : Creep) => c.memory.role == role}).length;
         while (creepNeeded > 0) {
           //spawn queue
           q.push(roleSetup);

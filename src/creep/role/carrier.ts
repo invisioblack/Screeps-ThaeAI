@@ -17,11 +17,13 @@ export class CreepRoleCarrier extends CreepRole {
    */
   nextAction(creep: Creep): CreepAction {
     let priority = [
-      'pickup',
       'fill',
+      'pickup',
       'fillStorage',
       'idle'
     ];
+
+
 
     for (let a of priority) {
       let act = CreepActions[a];
