@@ -106,7 +106,7 @@ export class CreepManager {
     if (room.memory.spawnQueue)
       delete room.memory.spawnQueue;
 
-    room.memory.spawnQueue = <CreepSetup[]>[];
+    room.memory.spawnQueue = <string[]>[];
 
     //iterate over each role, check for num vs max, build spawn list
     for (let role in CreepSetups) {
@@ -121,8 +121,12 @@ export class CreepManager {
           creepNeeded--;
         }
         //sort the array if we even have anything
-        if (q.length > 0)
-          room.memory.spawnQueue = _.sortBy(q, function(a : CreepSetup) { return -a.RCL[rcl].weight; });
+        if (q.length > 0) {
+          q = _.sortBy(q, function(a : CreepSetup) { return -a.RCL[rcl].weight; });
+          for (let itm in q) {
+            room.memory.spawnQueue.push(q[itm].role);
+          }
+        }
       }
     }
   }
@@ -137,11 +141,11 @@ export class CreepManager {
       return;
     let done = false;
     while (!done) {
-      let tmp: CreepSetup = q.shift();
+      let tmp: CreepSetup = CreepSetups[q.shift()];
       if (tmp) {
         //if unable to spawn, were either out of energy, or no more spawns free
         if (!CreepManager.spawn(tmp, room)) {
-          q.unshift(tmp);
+          q.unshift(tmp.role);
           done = true;
         }
       } else {

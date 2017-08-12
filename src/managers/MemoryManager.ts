@@ -48,8 +48,8 @@ export class MemoryManager {
   static garbageCollection() {
     for (let c in Memory.creeps) {
       if (!Game.creeps[c]) {
-        if (Memory.creeps[c].role == 'miner')
-          delete Memory.sources[Memory.creeps[c].target].dedicatedMiner;
+    //    if (Memory.creeps[c].role == 'miner')
+      //    delete Memory.sources[Memory.creeps[c].target].dedicatedMiner;
         delete Memory.creeps[c];
       }
     }
