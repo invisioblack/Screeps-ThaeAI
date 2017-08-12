@@ -5,9 +5,15 @@ import './setupGlobals';
 import {MemoryManager} from './managers/MemoryManager';
 import {CreepManager} from './managers/CreepManager';
 
+let G_CHECK = false;
+
 module.exports.loop = function () {
   let gTick = Game.time;
   log.DEBUG_ENABLED = true;
+  if (!G_CHECK) {
+    G_CHECK = true;
+    log.debug('+++NEW SERVER+++');
+  }
   log.debug('***************NEW TICK***************' + gTick + '***************');
 
   if(Game.cpu.bucket < 2500)

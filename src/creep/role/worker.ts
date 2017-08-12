@@ -26,17 +26,38 @@ export class CreepRoleWorker extends CreepRole {
 
     if (creep.carry.energy == 0) {
       priority = [
+        'pickup',
         'mine',
         'idle'
       ];
     } else {
-      priority = [
-        'fill',
-        'build',
-        //'repair',
-        'upgrade',
-        'idle'
-      ];
+      //if we have energy and are behold upgrade threshold
+      if (CONTROLLER_DOWNGRADE[creep.room.controller.level] / creep.room.controller.ticksToDowngrade < EMERGENCEY_UPGRADE_THRESHOLD) {
+        priority = [
+          'upgrade',
+          'pickup',
+          'mine',
+          'idle'
+        ]
+      } else {
+        if (!_.isUndefined(creep.room.storage) && ((_.sum(creep.room.storage.store) / STORAGE_CAPACITY) > WORKERS_DONT_FILL)) {
+          priority = [
+            'build',
+            'upgrade',
+            //'repair',
+            'fill',
+            'idle'
+          ];
+        } else {
+          priority = [
+            'fill',
+            'build',
+            //'repair',
+            'upgrade',
+            'idle'
+          ];
+        }
+      }
     }
 
     for (let a of priority) {

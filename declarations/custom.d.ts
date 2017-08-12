@@ -5,6 +5,8 @@ declare let JSON_STRINGIFY_EXPANDED: boolean;
 declare let log: any;
 declare let CREEP_SINGING: boolean;
 declare let ROOM_SINGING: boolean;
+declare let EMERGENCEY_UPGRADE_THRESHOLD: number;
+declare let WORKERS_DONT_FILL: number;
 
 //global functions/console commands
 declare function ex(x: any) : string;

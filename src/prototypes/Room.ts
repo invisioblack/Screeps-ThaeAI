@@ -52,7 +52,7 @@ Object.defineProperty(Room.prototype, 'pickableEnergy', {
   get: function() : number {
     let ret = 0;
     if (_.isUndefined(this._pickableEnergy)) {
-      for (let s of this.find(FIND_DROPPED_ENERGY, { filter : { resourceType : RESOURCE_ENERGY }})) {
+      for (let s of this.find(FIND_DROPPED_RESOURCES, { filter : { resourceType : RESOURCE_ENERGY }})) {
         if (s.amount > 20) //enough to matter
           ret += s.amount;
       }

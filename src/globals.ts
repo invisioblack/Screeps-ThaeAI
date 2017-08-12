@@ -12,10 +12,13 @@ global.CreepActions = {};
  */
 
 //Individual creep singing
-global.CREEP_SINGING = true;
+global.CREEP_SINGING = false;
 //singing on a roomwide scale
 global.ROOM_SINGING = false;
-
+//upgrade controller before all else at this threshold
+global.EMERGENCEY_UPGRADE_THRESHOLD = 0.20;
+//percentage of storage full where workers will lower fill priority
+global.WORKERS_DONT_FILL = 0.20;
 
 /**
  * Logging functions
