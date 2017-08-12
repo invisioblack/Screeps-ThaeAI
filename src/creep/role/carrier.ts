@@ -19,6 +19,7 @@ export class CreepRoleCarrier extends CreepRole {
     let priority = [
       'pickup',
       'fill',
+      'fillStorage',
       'idle'
     ];
 

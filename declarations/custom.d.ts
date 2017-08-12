@@ -6,7 +6,7 @@ declare let log: any;
 declare let CREEP_SINGING: boolean;
 declare let ROOM_SINGING: boolean;
 declare let EMERGENCEY_UPGRADE_THRESHOLD: number;
-declare let WORKERS_DONT_FILL: number;
+declare let STORAGE_ENERGY_THRESHOLD: number;
 
 //global functions/console commands
 declare function ex(x: any) : string;
@@ -133,6 +133,10 @@ interface Source {
    * Number of miner actions with this source as a target.
    */
   minerCount: number;
+  /**
+   * Name of a dedicated miner creep
+   */
+  dedicatedMiner: string;
 }
 
 interface Structure {
@@ -288,6 +292,14 @@ declare class CreepSetup {
    * @returns {number} number allowed to be spawned
    */
   getMaxSpawnable(rcl: number, room: Room): number;
+
+  /**
+   * Returns the max multiplier for the extended creep bodies in a specified room
+   * @param {number} rcl Room Control Level
+   * @param {Room} room room to check for
+   * @returns {number} max multiple
+   */
+  getMaxMulti(rcl: number, room: Room): number;
 
   /**
    * Used in the CreepSetup objects to determine various number values based on provided room conditions

@@ -47,8 +47,11 @@ export class MemoryManager {
    */
   static garbageCollection() {
     for (let c in Memory.creeps) {
-      if (!Game.creeps[c])
+      if (!Game.creeps[c]) {
+        if (Memory.creeps[c].role == 'miner')
+          delete Memory.sources[Memory.creeps[c].target].dedicatedMiner;
         delete Memory.creeps[c];
+      }
     }
 
     //if not a room I control, remove it

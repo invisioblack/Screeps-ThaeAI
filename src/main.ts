@@ -5,15 +5,12 @@ import './setupGlobals';
 import {MemoryManager} from './managers/MemoryManager';
 import {CreepManager} from './managers/CreepManager';
 
-let G_CHECK = false;
+
+log.DEBUG_ENABLED = true;
+log.LOG_ENABLED = true;
 
 module.exports.loop = function () {
   let gTick = Game.time;
-  log.DEBUG_ENABLED = true;
-  if (!G_CHECK) {
-    G_CHECK = true;
-    log.debug('+++NEW SERVER+++');
-  }
   log.debug('***************NEW TICK***************' + gTick + '***************');
 
   if(Game.cpu.bucket < 2500)
@@ -51,9 +48,12 @@ module.exports.loop = function () {
     if (ROOM_SINGING)
       Game.rooms[r].sing("1|2|3");
 
-    let os : OwnedStructure[] = Game.rooms[r].find<OwnedStructure>(FIND_MY_STRUCTURES);
+    let os : Creep[] = Game.rooms[r].find<Creep>(FIND_MY_CREEPS);
+    let i = 0.5;
     for (let s in os) {
-      //new RoomVisual(r).text(s.structureType, s.pos.x+1, s.pos.y);
+      let ss : Creep = os[s];
+      new RoomVisual(r).text(ss.name + " TTL: " + ss.ticksToLive, 0, i, {font: 0.5, opacity: 0.7, align: 'left'});
+      i+=0.5;
     }
   }
 };

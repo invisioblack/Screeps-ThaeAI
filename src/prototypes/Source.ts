@@ -33,19 +33,25 @@ Object.defineProperty(Source.prototype, "usableFields", {
 });
 
 
-//TODO if dedicated miner RoleMiner assigned, do not allow other creeps to mine, maybe another value that overrides this? Cannot cache due to
 Object.defineProperty(Source.prototype, "minerCount", {
   get: function (): number {
-    /*let ret = 0;
-    if (_.isUndefined(this._minerCount)) {
+    let ret = 99;
+    if (_.isUndefined(this.memory.dedicatedMiner)) {
       ret = this.room.find(FIND_MY_CREEPS, { filter : (c : Creep) => c.memory.target == this.id && c.memory.action == 'mine'}).length;
-      this._minerCount = ret;
-    } else {
-      ret = this._minerCount;
     }
     return ret;
-    */
-    return this.room.find(FIND_MY_CREEPS, { filter : (c : Creep) => c.memory.target == this.id && c.memory.action == 'mine'}).length;
+  },
+  configurable: true,
+});
+
+
+Object.defineProperty(Source.prototype, "dedicatedMiner", {
+  get: function (): number {
+    return this.memory.dedicatedMiner;
+  },
+  set: function (v: string): string {
+    this.memory.dedicatedMiner = v;
+    return this.memory.dedicatedMiner;
   },
   configurable: true,
 });

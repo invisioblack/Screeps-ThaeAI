@@ -68,11 +68,19 @@ export class CreepManager {
 
     //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body, not exceeding maxMult
     if (maxMult > 0)
-      maxMult = Math.min(Math.floor((energyAvailable - CreepSetup.getBodyCost(body)) / CreepSetup.getBodyCost(rclSetup.multiBody)), maxMult);
+      maxMult = Math.min(Math.floor((maxEnergy - CreepSetup.getBodyCost(body)) / CreepSetup.getBodyCost(rclSetup.multiBody)), maxMult);
 
     while (maxMult > 0) {
       maxMult--;
       body.concat(rclSetup.multiBody);
+    }
+
+    //not enough energy to make the maxed out body
+    //TODO try and make a smaller creep?
+    let cost = CreepSetup.getBodyCost(body);
+    if (cost > energyAvailable) {
+      log.debug('Attempted to make a ' + name + " but there wasn't enough energy! Deficit of: " + (cost - energyAvailable));
+      return false;
     }
 
     //we have memory, a body, and a name. Checked for energy, try and spawn it now

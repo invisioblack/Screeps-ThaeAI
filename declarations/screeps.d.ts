@@ -1743,7 +1743,7 @@ interface CircleStyle extends PolyStyle {
 }
 interface TextStyle {
     color?: string;
-    size?: number;
+    font?: number;
     align?: "center" | "left" | "right";
     opacity?: number;
 }

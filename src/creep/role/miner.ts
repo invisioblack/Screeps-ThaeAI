@@ -18,7 +18,7 @@ export class CreepRoleMiner extends CreepRole {
    */
   nextAction(creep: Creep): CreepAction {
     let priority = [
-      'mine',
+      'minerMine',
       'idle'
     ];
 
