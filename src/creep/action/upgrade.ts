@@ -6,7 +6,7 @@ export class CreepActionUpgrade extends CreepAction {
 
   constructor() {
     super('upgrade');
-    this.range = 3;
+    this.range = ACTION_RANGES.UPGRADE;
   }
 
   isValidAction(creep: Creep): boolean {

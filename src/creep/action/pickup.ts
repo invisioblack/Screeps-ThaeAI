@@ -6,7 +6,7 @@ export class CreepActionPickup extends CreepAction {
 
   constructor() {
     super('pickup');
-    this.range = 1;
+    this.range = ACTION_RANGES.PICKUP;
   }
 
   isValidAction(creep: Creep): boolean {

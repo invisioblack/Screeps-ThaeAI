@@ -6,7 +6,7 @@ export class CreepActionWithdraw extends CreepAction {
 
   constructor() {
     super('withdraw');
-    this.range = 1;
+    this.range = ACTION_RANGES.WITHDRAW;
   }
 
   isValidAction(creep: Creep): boolean {

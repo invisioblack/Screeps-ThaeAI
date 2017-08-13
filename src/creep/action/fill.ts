@@ -8,7 +8,7 @@ export class CreepActionFill extends CreepAction {
 
   constructor() {
     super('fill');
-    this.range = 1;
+    this.range = ACTION_RANGES.DEPOSIT;
   }
 
   isValidAction(creep: Creep): boolean {

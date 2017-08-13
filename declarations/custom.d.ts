@@ -8,6 +8,15 @@ declare let CREEP_SINGING: boolean;
 declare let ROOM_SINGING: boolean;
 declare let EMERGENCEY_UPGRADE_THRESHOLD: number;
 declare let STORAGE_ENERGY_THRESHOLD: number;
+declare let ACTION_RANGES: {
+  MINE: number,
+  UPGRADE: number,
+  WITHDRAW: number,
+  REPAIR: number,
+  DEPOSIT: number,
+  PICKUP: number,
+  BUILD: number
+};
 
 /**
  *  Global Creep lists, Setups, Roles, Actions

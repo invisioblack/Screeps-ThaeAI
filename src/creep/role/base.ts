@@ -39,6 +39,6 @@ export class CreepRole  {
   }
 
   cleanup(creep: Creep): void {
-
+    log.debug(creep.name + " is expiring.");
   }
 }

@@ -16,6 +16,16 @@ global.EMERGENCEY_UPGRADE_THRESHOLD = 0.20;
 //percentage of storage full where workers will lower fill priority
 global.STORAGE_ENERGY_THRESHOLD = 0.50;
 
+global.ACTION_RANGES = {
+  MINE: 1,
+  UPGRADE: 3,
+  WITHDRAW: 1,
+  REPAIR: 3,
+  DEPOSIT: 1,
+  PICKUP: 1,
+  BUILD: 3
+};
+
 
 global.log = {
   LOG_ENABLED : false,

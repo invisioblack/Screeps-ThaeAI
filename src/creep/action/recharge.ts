@@ -8,7 +8,7 @@ export class CreepActionRecharge extends CreepAction {
 
   constructor() {
     super('recharge');
-    this.range = 1;
+    this.range = ACTION_RANGES.DEPOSIT;
   }
 
   isValidAction(creep: Creep): boolean {

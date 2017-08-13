@@ -6,7 +6,7 @@ export class CreepActionWithdrawStorage extends CreepAction {
 
   constructor() {
     super('withdrawStorage');
-    this.range = 1;
+    this.range = ACTION_RANGES.WITHDRAW;
   }
 
   isValidAction(creep: Creep): boolean {

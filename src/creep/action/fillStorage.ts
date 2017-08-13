@@ -7,7 +7,7 @@ export class CreepActionFillStorage extends CreepAction {
 
   constructor() {
     super('fillStorage');
-    this.range = 1;
+    this.range = ACTION_RANGES.DEPOSIT;
   }
 
   isValidAction(creep: Creep): boolean {
