@@ -97,6 +97,8 @@ export class CreepManager {
 
     //iterate over each role, check for num vs max, build spawn list
     for (let role in CreepSetups) {
+      if (role == 'emergencyWorker')
+        continue;
       let roleSetup: CreepSetup = CreepSetups[role];
 
       //is the rcl high enough for this creep
@@ -135,5 +137,9 @@ export class CreepManager {
         done = true;
       }
     }
+  }
+
+  static emergencySpawn(room: Room): void {
+    CreepManager.spawn(CreepSetups['emergencyWorker'], room);
   }
 }

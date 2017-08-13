@@ -19,6 +19,7 @@ import './prototypes/Structure';
  * Creep Setups
  *  Each file, when imported, will add itself to the global list CreepSetups
  */
+import './creep/setup/emergencyWorker';
 import './creep/setup/carrier';
 import './creep/setup/miner';
 import './creep/setup/worker';
@@ -45,3 +46,4 @@ import './creep/action/pickup'
 import './creep/action/recharge'
 import './creep/action/repair'
 import './creep/action/upgrade'
+import './creep/action/withdraw'

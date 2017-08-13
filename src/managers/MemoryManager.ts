@@ -36,11 +36,8 @@ export class MemoryManager {
 
   static garbageCollection() {
     for (let c in Memory.creeps) {
-      if (!Game.creeps[c]) {
-        if (Memory.creeps[c].role == 'miner')
-          delete Memory.sources[Memory.creeps[c].target].dedicatedMiner;
+      if (!Game.creeps[c])
         delete Memory.creeps[c];
-      }
     }
 
     //if not a room I control, remove it
@@ -48,6 +45,15 @@ export class MemoryManager {
     for (let r in Memory.rooms) {
       if (!Game.rooms[r])
         delete Memory.rooms[r];
+      else {
+        let sources = Game.rooms[r].memory.sources;
+        for (let s in sources) {
+          if (!_.isUndefined(sources[s].dedicatedMiner)) {
+            if (!Game.creeps[sources[s].dedicatedMiner])
+              delete Memory.sources[sources[s].id].dedicatedMiner;
+          }
+        }
+      }
     }
   }
 }

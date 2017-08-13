@@ -13,6 +13,7 @@ export class CreepRoleCarrier extends CreepRole {
       'fill',
       'recharge',
       'pickup',
+      'withdraw',
       'fillStorage',
       'idle'
     ];

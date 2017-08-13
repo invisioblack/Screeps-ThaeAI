@@ -23,6 +23,13 @@ Creep.prototype.hasActiveBodyparts = function (type: string): boolean {
   return false;
 };
 
+Creep.prototype.sing = function(sentence: string, pub?: boolean): void {
+  if(pub === undefined)
+    pub = true;
+  let words = sentence.split("|");
+  this.say(words[Game.time % words.length], pub);
+};
+
 Object.defineProperty(Creep.prototype, 'carrySum', {
   configurable: true,
   get: function() {
@@ -35,10 +42,3 @@ Object.defineProperty(Creep.prototype, 'carrySum', {
     return ret;
   }
 });
-
-Creep.prototype.sing = function(sentence: string, pub?: boolean): void {
-  if(pub === undefined)
-    pub= true;
-  let words = sentence.split("|");
-  this.say(words[Game.time % words.length], pub);
-};

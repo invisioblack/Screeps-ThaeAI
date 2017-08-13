@@ -3,13 +3,9 @@
 Room.prototype.sing = function(sentence: string, pub = true): void{
   let words = sentence.split("|");
   let creeps = _.filter(Game.creeps, (c) => c.room.name == this.name);
-  creeps = _.sortBy(creeps, function(c){return (c.pos.x + (c.pos.y*50))});
 
-  let i = 0;
-  while(i < creeps.length){
-    creeps[i].say(words[i % words.length], pub);
-    i++;
-  }
+  if (creeps.length > 0)
+    creeps[Math.floor(Math.random()*creeps.length)].say(words[Game.time % words.length], pub);
 };
 
 Object.defineProperty(Room.prototype, 'mineableEnergy', {
@@ -110,6 +106,22 @@ Object.defineProperty(Room.prototype, 'neededBatteryEnergy', {
       this._neededBatteryEnergy = ret;
     } else {
       ret = this._neededBatteryEnergy;
+    }
+    return ret;
+  }
+});
+
+Object.defineProperty(Room.prototype, 'storedEnergy', {
+  configurable: true,
+  get: function() : number {
+    let ret = 0;
+    if (_.isUndefined(this._storedEnergy)) {
+      for (let s of this.find(FIND_STRUCTURES, { filter : function (s: Structure) {return s.structureType == STRUCTURE_CONTAINER || s.structureType == STRUCTURE_STORAGE; }})) {
+        ret += s.store[RESOURCE_ENERGY];
+      }
+      this._storedEnergy = ret;
+    } else {
+      ret = this._storedEnergy;
     }
     return ret;
   }

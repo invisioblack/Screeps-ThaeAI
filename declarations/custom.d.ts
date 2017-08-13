@@ -105,7 +105,12 @@ interface Room {
    * The total amount of battery power needed (towers)
    */
   neededBatteryEnergy: number;
-  _neededBatteryEnergy: number
+  _neededBatteryEnergy: number;
+  /**
+   * Total energy stored in contianers/storage
+   */
+  storedEnergy: number;
+ _storedEnergy: number;
 }
 
 interface RoomObject {
@@ -204,7 +209,13 @@ declare class CreepManager {
    * @param room Room to be processed
    */
   static processSpawnQueue(room: Room): void;
-}
+
+  /**
+   * Spawns an emergency worker creep to restart the room
+   * @param {Room} room room in crisis
+   */
+  static emergencySpawn(room: Room): void;
+  }
 
 /**
  * RoomManager
@@ -215,6 +226,12 @@ declare class RoomManager {
    * Processes each room
    */
   static processRooms(): void;
+
+  /**
+   * Iterates over the towers in a room and makes them act
+   * @param {Room} room room to be processed
+   */
+  static processTowers(room: Room): void;
 }
 
 

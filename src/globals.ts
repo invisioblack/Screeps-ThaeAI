@@ -14,7 +14,7 @@ global.CreepActions = {};
 //Individual creep singing
 global.CREEP_SINGING = false;
 //singing on a roomwide scale
-global.ROOM_SINGING = false;
+global.ROOM_SINGING = true;
 //upgrade controller before all else at this threshold
 global.EMERGENCEY_UPGRADE_THRESHOLD = 0.20;
 //percentage of storage full where workers will lower fill priority
@@ -135,7 +135,6 @@ global.errName = function (err: number): string {
 //many of these credit of semperrabbit and warinternal
 
 /**
-
  * returns string for a link that can be clicked from the console
  * to change which room you are viewing. Useful for other logging functions
  * Author: Helam

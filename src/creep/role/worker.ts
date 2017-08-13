@@ -13,6 +13,7 @@ export class CreepRoleWorker extends CreepRole {
 
     if (creep.carry.energy == 0) {
       priority = [
+        'withdraw',
         'pickup',
         'mine',
         'idle'
@@ -22,6 +23,7 @@ export class CreepRoleWorker extends CreepRole {
       if (creep.room.controller.ticksToDowngrade / CONTROLLER_DOWNGRADE[creep.room.controller.level] < EMERGENCEY_UPGRADE_THRESHOLD) {
         priority = [
           'upgrade',
+          'withdraw',
           'pickup',
           'mine',
           'idle'
