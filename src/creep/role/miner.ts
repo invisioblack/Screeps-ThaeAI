@@ -53,7 +53,7 @@ export class CreepRoleMiner extends CreepRole {
       creep.memory.target = target;
       Memory.sources[creep.memory.target].dedicatedMiner = creep.name;
     } else
-      log.warn('Miner cannot acquire a source! ' + creep.name + ' Sources: ' + creep.room.memory.sources.length + ' Miners: ' + creep.room.find(FIND_MY_CREEPS, {filter: (c: Creep) => c.memory.role == 'miner'}))
+      log.warn('Miner cannot acquire a source! {' + creep.name + '} Sources: ' + creep.room.memory.sources.length + ' Miners: ' + creep.room.find(FIND_MY_CREEPS, {filter: (c: Creep) => c.memory.role == 'miner'}).length)
 
   }
 }
