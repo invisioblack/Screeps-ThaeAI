@@ -101,6 +101,11 @@ interface Room {
    */
   hasRepairables: boolean;
   _hasRepairables: boolean;
+  /**
+   * The total amount of battery power needed (towers)
+   */
+  neededBatteryEnergy: number;
+  _neededBatteryEnergy: number
 }
 
 interface RoomObject {

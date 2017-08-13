@@ -32,7 +32,7 @@ export class CreepActionRepair extends CreepAction {
 
   //super hacky but forces the creep to reacquire a job after repairing. Gets stuck on a single job even once its repaired
   work(creep: Creep): number {
-    creep.memory.role = 'idle';
+    creep.memory.action = 'idle';
     return creep.repair(Game.getObjectById<Structure>(creep.memory.target));
   }
 }

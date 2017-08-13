@@ -1,5 +1,17 @@
 'use strict';
 
+Room.prototype.sing = function(sentence: string, pub = true): void{
+  let words = sentence.split("|");
+  let creeps = _.filter(Game.creeps, (c) => c.room.name == this.name);
+  creeps = _.sortBy(creeps, function(c){return (c.pos.x + (c.pos.y*50))});
+
+  let i = 0;
+  while(i < creeps.length){
+    creeps[i].say(words[i % words.length], pub);
+    i++;
+  }
+};
+
 Object.defineProperty(Room.prototype, 'mineableEnergy', {
   configurable: true,
   get: function() : number {
@@ -64,19 +76,6 @@ Object.defineProperty(Room.prototype, 'pickableEnergy', {
   }
 });
 
-
-Room.prototype.sing = function(sentence: string, pub = true): void{
-  let words = sentence.split("|");
-  let creeps = _.filter(Game.creeps, (c) => c.room.name == this.name);
-  creeps = _.sortBy(creeps, function(c){return (c.pos.x + (c.pos.y*50))});
-
-  let i = 0;
-  while(i < creeps.length){
-    creeps[i].say(words[i % words.length], pub);
-    i++;
-  }
-};
-
 Object.defineProperty(Room.prototype, 'hasRepairables', {
   configurable: true,
   get: function() : boolean {
@@ -94,6 +93,23 @@ Object.defineProperty(Room.prototype, 'hasRepairables', {
       this._hasRepairables = ret;
     } else {
       ret = this._hasRepairables;
+    }
+    return ret;
+  }
+});
+
+Object.defineProperty(Room.prototype, 'neededBatteryEnergy', {
+  configurable: true,
+  get: function() : number {
+    let ret = 0;
+    if (_.isUndefined(this._neededBatteryEnergy)) {
+      let ext = this.find(FIND_MY_STRUCTURES, {filter : (s : OwnedStructure) =>  s.structureType == STRUCTURE_TOWER});
+      for (let e of ext) {
+        ret += (e.energyCapacity - e.energy);
+      }
+      this._neededBatteryEnergy = ret;
+    } else {
+      ret = this._neededBatteryEnergy;
     }
     return ret;
   }
