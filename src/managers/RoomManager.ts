@@ -30,17 +30,31 @@ export class RoomManager {
   private static processTowers(room: Room): void {
     const towers = room.find<StructureTower>(FIND_MY_STRUCTURES, {filter: function(t: Structure) { return t.structureType == STRUCTURE_TOWER;}});
     for (let t in towers) {
+
+      let hostiles = room.find<Creep>(FIND_HOSTILE_CREEPS);
+      if (hostiles.length > 0) {
+        for (let h in hostiles) {
+          if (towers[t].attack(hostiles[h]) == OK)
+            log.debug("Tower: " + towers[t].id + " is attacking " + hostiles[h].name);
+          else
+            log.debug("Tower: " + towers[t].id + " is out of energy");
+        }
+      }
+
       let places = room.find<Structure>(FIND_STRUCTURES, { filter : function (o: Structure) { return o.structureType != STRUCTURE_WALL && o.structureType != STRUCTURE_RAMPART}});
 
       //TODO pick closest site
-      if (places.length > 0)
+      if (places.length > 0) {
         for (let p in places) {
           if (places[p].hits < places[p].hitsMax) {
-            log.debug("Tower: " + towers[t].id + " is repairing a " + places[p].structureType + ": " + places[p].id);
-            towers[t].repair(places[p]);
+            if (towers[t].repair(places[p]) == OK)
+              log.debug("Tower: " + towers[t].id + " is repairing a " + places[p].structureType + ": " + places[p].id);
+            else
+              log.debug("Tower: " + towers[t].id + " is out of energy");
             break;
           }
         }
+      }
     }
 
   }

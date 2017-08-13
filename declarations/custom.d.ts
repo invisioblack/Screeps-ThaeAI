@@ -359,17 +359,35 @@ declare class CreepSetup {
 //endregion
 
 //region Roles
+/**
+ * CreepRole
+ *  Base role class
+ */
 declare class CreepRole {
+  /**
+   * Name of the role
+   */
   name: string;
   constructor(name: string);
-  act(creep: Creep): void; //perform action
-  nextAction(creep: Creep): CreepAction; //decides what to do next
+  /**
+   * Executes the action decided for thsi role each tick
+   * @param {Creep} creep Creep performing action
+   */
+  act(creep: Creep): void;
+  /**
+   * Generates the next action, decided by priority lists in nextAction
+   * @param {Creep} creep Creep performing the action
+   * @returns {CreepAction} The action decided upon
+   */
+  nextAction(creep: Creep): CreepAction;
+
+  /**
+   * Actions to take when 1TTL remains
+   * @param {Creep} creep Creep to cleanup
+   */
+  cleanup(creep: Creep): void;
 }
 
-declare class CreepRoleWorker extends CreepRole {
-  constructor();
-  nextAction(creep: Creep): CreepAction; //decides what to do next
-}
 //endregion
 
 //region Actions

@@ -17,6 +17,7 @@ export class MemoryManager {
           mem.sources = [];
           for (let s of room.find<Source>(FIND_SOURCES)) {
             mem.sources.push(s.id);
+            _.set(Memory, `sources.${s.id}.room`, room.name);
           }
 
           mem.spawns = [];
@@ -45,15 +46,11 @@ export class MemoryManager {
     for (let r in Memory.rooms) {
       if (!Game.rooms[r])
         delete Memory.rooms[r];
-      else {
-        let sources = Game.rooms[r].memory.sources;
-        for (let s in sources) {
-          if (!_.isUndefined(sources[s].dedicatedMiner)) {
-            if (!Game.creeps[sources[s].dedicatedMiner])
-              delete Memory.sources[sources[s].id].dedicatedMiner;
-          }
-        }
-      }
+    }
+
+    for (let s in Memory.sources) {
+      if (!Game.creeps[Memory.sources[s].dedicatedMiner])
+        delete Memory.sources[s].dedicatedMiner;
     }
   }
 }

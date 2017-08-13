@@ -26,6 +26,9 @@ export class CreepRole  {
     } else {
       log.err('Creep without an action: ' + creep.name + ' : ' + ex(creep.memory));
     }
+
+    if (creep.ticksToLive <= 1)
+      this.cleanup(creep);
   }
 
   nextAction(creep: Creep): CreepAction {
@@ -33,5 +36,9 @@ export class CreepRole  {
     let act = CreepActions['idle'];
     act.assign(creep);
     return act;
+  }
+
+  cleanup(creep: Creep): void {
+
   }
 }

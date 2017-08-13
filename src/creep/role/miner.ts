@@ -2,6 +2,7 @@
 
 import {CreepRole} from './base';
 
+//TODO refactor miner code right into this role, it is very specific unlike other roles
 export class CreepRoleMiner extends CreepRole {
 
   constructor() {
@@ -22,6 +23,10 @@ export class CreepRoleMiner extends CreepRole {
     }
 
     return super.nextAction(creep);
+  }
+
+  cleanup(creep: Creep) {
+    delete Memory.sources[creep.memory.target].dedicatedMiner;
   }
 }
 

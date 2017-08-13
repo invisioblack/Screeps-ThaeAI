@@ -17,7 +17,6 @@ Object.defineProperty(Source.prototype, "memory", {
   enumerable: false,
 });
 
-
 Object.defineProperty(Source.prototype, "usableFields", {
   get: function (): number {
     let ret = 0;
@@ -32,7 +31,6 @@ Object.defineProperty(Source.prototype, "usableFields", {
   configurable: true,
 });
 
-
 Object.defineProperty(Source.prototype, "minerCount", {
   get: function (): number {
     let ret = 99;
@@ -44,8 +42,18 @@ Object.defineProperty(Source.prototype, "minerCount", {
   configurable: true,
 });
 
-
 Object.defineProperty(Source.prototype, "dedicatedMiner", {
+  get: function (): number {
+    return this.memory.dedicatedMiner;
+  },
+  set: function (v: string): string {
+    this.memory.dedicatedMiner = v;
+    return this.memory.dedicatedMiner;
+  },
+  configurable: true,
+});
+
+Object.defineProperty(Source.prototype, "minerContainer", {
   get: function (): number {
     return this.memory.dedicatedMiner;
   },
