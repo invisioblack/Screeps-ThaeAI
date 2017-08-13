@@ -1,15 +1,7 @@
 "use strict";
 
-/**
- * MemoryManager
- *  Static class to manage various Memory functions
- */
 export class MemoryManager {
 
-  /**
-   * Generates the Memory.rooms object
-   * @param refresh if true, will force a regeneration of Memory.rooms
-   */
   static buildRoomMemory(refresh: boolean = false) {
     if (!Memory.rooms)
       Memory.rooms = {};
@@ -42,9 +34,6 @@ export class MemoryManager {
     }
   }
 
-  /**
-   * Removes stale Memory entries
-   */
   static garbageCollection() {
     for (let c in Memory.creeps) {
       if (!Game.creeps[c]) {

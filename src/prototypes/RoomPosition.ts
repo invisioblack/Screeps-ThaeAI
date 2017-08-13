@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Is a location occupied by a creep. Credit: proximo
- */
 Object.defineProperty(RoomPosition.prototype, "isOccupied", {
   enumerable: true,
   get: function(): boolean {

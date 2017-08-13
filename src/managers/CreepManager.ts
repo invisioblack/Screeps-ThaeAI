@@ -2,14 +2,8 @@
 
 import {CreepSetup} from '../creep/setup/base'
 
-/**
- * CreepManager
- *  Static class that handles all of the creeps actions each tick
- */
 export class CreepManager {
-  /**
-   * Iterates over all of the creeps and runs their roles act()
-   */
+
   static doActions() {
     //iterate over creeps and load their handlers
     for (let c in Game.creeps) {
@@ -28,12 +22,6 @@ export class CreepManager {
     }
   }
 
-  /**
-   * Spawns a creep in the chosen Room based on provided CreepSetup object
-   * @param setup  CreepSetup object to generate a creep from
-   * @param room  Room object to spawn the creep in
-   * @returns {boolean} whether or not the spawn was successful
-   */
   static spawn(setup : CreepSetup, room: Room) : boolean {
     let maxEnergy = room.energyCapacityAvailable;
     let energyAvailable = room.energyAvailable;
@@ -97,12 +85,6 @@ export class CreepManager {
     return false;
   }
 
-
-  /**
-   * Builds a rooms spawn queue based on the population required in the Room provided.
-   *  Sorts the queue by the weight of the missing creeps
-   * @param room Room to generate a spawn queue for
-   */
   static populationCheck(room: Room) {
     let rcl = room.controller.level;
     let q = <CreepSetup[]>[];
@@ -136,10 +118,6 @@ export class CreepManager {
     }
   }
 
-  /**
-   * Processes the provided rooms spawn queue, attempting to spawn as many as possible
-   * @param room Room to be processed
-   */
   static processSpawnQueue(room: Room) {
     let q = room.memory.spawnQueue;
     if (!q || q.length < 1)

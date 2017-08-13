@@ -22,7 +22,7 @@ setup.RCL = {
     weight: 500
   },
   3: {
-    maxSpawned: 2,
+    maxSpawned: 3,
     baseBody: [WORK, CARRY, MOVE],
     multiBody: [WORK, CARRY, MOVE],
     maxMulti: 2,
@@ -30,7 +30,7 @@ setup.RCL = {
     weight: 999
   },
   4: {
-    maxSpawned: 2,
+    maxSpawned: 3,
     baseBody: [WORK, CARRY, MOVE],
     multiBody: [WORK, CARRY, MOVE],
     maxMulti: 9,
@@ -38,7 +38,7 @@ setup.RCL = {
     weight: 999
   },
   5: {
-    maxSpawned: 1,
+    maxSpawned: 2,
     baseBody: [WORK, CARRY, MOVE],
     multiBody: [WORK, CARRY, MOVE],
     maxMulti: 9,

@@ -76,3 +76,25 @@ Room.prototype.sing = function(sentence: string, pub = true): void{
     i++;
   }
 };
+
+Object.defineProperty(Room.prototype, 'hasRepairables', {
+  configurable: true,
+  get: function() : boolean {
+    let ret = false;
+    if (_.isUndefined(this._hasRepairables)) {
+      let places = this.find(FIND_STRUCTURES, { filter : function (o: Structure) { return o.structureType != STRUCTURE_WALL && o.structureType != STRUCTURE_RAMPART}});
+
+      if (places.length > 0)
+        for (let p in places) {
+          if (places[p].hits < places[p].hitsMax) {
+            ret = true;
+            break;
+          }
+        }
+      this._hasRepairables = ret;
+    } else {
+      ret = this._hasRepairables;
+    }
+    return ret;
+  }
+});

@@ -1,31 +1,12 @@
 'use strict';
 
-/**
- * CreepSetup
- *  Contains all of the information to create a creep
- */
 export class CreepSetup {
-  /**
-   * Role is the string name of the creeps role in life. Matches between Role and Setup
-   */
+
   role: string;
-  /**
-   * Minimum RCL to spawn this creep
-   */
   minRCL: number;
-  /**
-   * Base, blank CreepRCLSetup with no information
-   */
   noSetup: CreepRCLSetup;
-  /**
-   * A collection of CreepRCLSetup for each RCL from 1-8
-   */
   RCL: { [key: number] : CreepRCLSetup };
 
-  /**
-   * Constructor only requiring the desired Role/Setup name
-   * @param role name of the Setup
-   */
   constructor(role: string) {
     this.role = role;
     this.minRCL = 0;
@@ -51,30 +32,14 @@ export class CreepSetup {
     };
   }
 
-  /**
-   * Returns the max multiplier for the extended creep bodies in a specified room
-   * @param {Room} room room to check for
-   * @returns {number} max multiple
-   */
   getMaxSpawnable(room: Room) : number {
     return CreepSetup.objOrFunc(this.RCL[room.controller.level].maxSpawned, room);
   }
 
-  /**
-   * Returns the max multiplier for the extended creep bodies in a specified room
-   * @param {Room} room room to check for
-   * @returns {number} max multiple
-   */
   getMaxMulti(room: Room) : number {
     return CreepSetup.objOrFunc(this.RCL[room.controller.level].maxMulti, room);
   }
 
-  /**
-   * Used in the CreepSetup objects to determine various number values based on provided room conditions
-   * @param obj Either a number or a function that will return a number
-   * @param room Optional: room in which to use in determining the number to return
-   * @returns {any}
-   */
   protected static objOrFunc(obj: number | ((room: Room) => number), room?: Room): number {
     if (obj == null)
       return -1;
@@ -84,11 +49,6 @@ export class CreepSetup {
       return obj;
   }
 
-  /**
-   * Creates a balanced body array
-   * @param energy max energy to use
-   * @returns {Array} body string[] for a creep
-   */
   static getBalancedBody(energy: number): string[] {
     const numberOfParts = Math.floor(energy / 200);
     let body = [];
@@ -100,11 +60,6 @@ export class CreepSetup {
     return body;
   }
 
-  /**
-   * Returns the total cost of a body[] for a creep
-   * @param body body[] to compute a cost for
-   * @returns {number} total cost of body
-   */
   static getBodyCost(body: string[]): number {
     let total = 0;
     for (let s of body)
@@ -112,11 +67,6 @@ export class CreepSetup {
     return total;
   }
 
-  /**
-   * Sorts the body into preferred loss order
-   * @param {string[]} body body to sort
-   * @returns {string[]} sorted body
-   */
   static sortBody(body: string[]): string[] {
     return _.sortBy(body, p => _.indexOf([TOUGH,MOVE,WORK,CARRY,ATTACK,RANGED_ATTACK,HEAL,CLAIM],p))
   }

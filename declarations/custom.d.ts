@@ -96,6 +96,11 @@ interface Room {
    */
   pickableEnergy: number;
   _pickableEnergy: number;
+  /**
+   * Are there repairable objects in the Room? Caches per tick
+   */
+  hasRepairables: boolean;
+  _hasRepairables: boolean;
 }
 
 interface RoomObject {
