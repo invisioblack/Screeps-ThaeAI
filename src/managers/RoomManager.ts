@@ -35,7 +35,7 @@ export class RoomManager {
       if (hostiles.length > 0) {
         for (let h in hostiles) {
           if (towers[t].attack(hostiles[h]) == OK)
-            log.debug("Tower: " + towers[t].id + " is attacking " + hostiles[h].name);
+            log.debug("Tower: " + towers[t].id + " is attacking " + hostiles[h].owner);
           else
             log.debug("Tower: " + towers[t].id + " is out of energy");
         }

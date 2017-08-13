@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- *  Global Creep lists, Setups, Roles, Actions
- */
 global.CreepSetups = {};
 global.CreepRoles = {};
 global.CreepActions = {};
@@ -10,7 +7,6 @@ global.CreepActions = {};
 /**
  * Global Settings
  */
-
 //Individual creep singing
 global.CREEP_SINGING = false;
 //singing on a roomwide scale
@@ -20,72 +16,48 @@ global.EMERGENCEY_UPGRADE_THRESHOLD = 0.20;
 //percentage of storage full where workers will lower fill priority
 global.STORAGE_ENERGY_THRESHOLD = 0.50;
 
-/**
- * Logging functions
- *  prints a string to the console, differing colors
- */
+
 global.log = {
   LOG_ENABLED : false,
   WARN_ENABLED : true,
   ERROR_ENABLED : true,
   DEBUG_ENABLED : false,
-  debug: function log(arg: string) {
-    if (this.DEBUG_ENABLED)return console.log('<span style=color:#00c6d1>' + arg + '</span>')
+  debug: function(arg: string): void {
+    if (this.DEBUG_ENABLED)return console.log('<span style=color:#005a1d>' + arg + '</span>')
   },
-  log: function log(arg: string) {
+  log: function(arg: string): void {
     if (this.LOG_ENABLED)return console.log(arg)
   },
-  warn: function warn(arg: string) {
+  warn: function (arg: string): void {
     if (this.WARN_ENABLED)return console.log('<span style=color:#FFBF3F>' + arg + '</span>');
   },
-  err: function err(arg: string) {
+  err: function(arg: string): void {
     if (this.ERROR_ENABLED)return console.log('<span style=color:#D18F98>' + arg + '</span>');
   }
 };
 
-/**
- * JSON.stringify wrapper
- *  JSON_STRINGIFY_EXPANDED if true will make the returned string multi line
- * @param x object to turn into a string
- * @returns {string} object as a string
- */
 global.JSON_STRINGIFY_EXPANDED = false;
 global.ex = function (x: any) : string {
     return JSON.stringify(x, null, JSON_STRINGIFY_EXPANDED ? 1 : 0);
 };
 
-/**
- * Wipes Memory
- */
 global.rm = function() {
   Memory = <any>{};
   RawMemory.set('');
 };
 
-/**
- * Removes all of the flags
- */
 global.rf = function() {
   _.forEach(Game.flags, f => f.remove());
 };
 
-/**
- * Kills all of your creeps
- */
 global.rc = function() {
   _.forEach(Game.creeps, c => c.suicide());
 };
 
-/**
- * Removes all construction sites
- */
 global.rcs = function() {
   _.forEach(Game.constructionSites, s => s.remove());
 };
 
-/**
- * Wipes everything, including memory
- */
 global.respawn = function(){
  rc();
  rcs();
@@ -93,11 +65,6 @@ global.respawn = function(){
  rm();
 };
 
-/**
- * Converts an error code into a string equivalent
- * @param err ERR_* constant number value
- * @returns {string} string version of the ERR_* constant
- */
 global.errName = function (err: number): string {
   switch (err) {
     case ERR_NOT_OWNER:
@@ -132,16 +99,6 @@ global.errName = function (err: number): string {
   return '';
 };
 
-//many of these credit of semperrabbit and warinternal
-
-/**
- * returns string for a link that can be clicked from the console
- * to change which room you are viewing. Useful for other logging functions
- * Author: Helam
- * @param roomArg {Room|RoomObject|RoomPosition|string}
- * @returns {string}
- */
-
 global.roomLink = function(roomArg: any): string {
   if (roomArg instanceof Room) {
     roomArg = roomArg.name;
@@ -156,13 +113,6 @@ global.roomLink = function(roomArg: any): string {
   }
   return `<a href="#!/room/${roomArg}">${roomArg}</a>`;
 };
-
-
-/**
- * console function that prints:
- *  gcl status
- *  rcl status and significant missing structures for each claimed room
- */
 
 global.roomLevels = function() {
   let gclString = `===== GCL =====`;

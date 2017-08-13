@@ -1,28 +1,87 @@
 declare let module: any;
 declare let global: any;
 
-declare let JSON_STRINGIFY_EXPANDED: boolean;
-declare let log: any;
+/**
+ * Global setting declarations, see globals.ts
+ */
 declare let CREEP_SINGING: boolean;
 declare let ROOM_SINGING: boolean;
 declare let EMERGENCEY_UPGRADE_THRESHOLD: number;
 declare let STORAGE_ENERGY_THRESHOLD: number;
 
-//global functions/console commands
-declare function ex(x: any) : string;
-declare function errName(err: number) : string;
-declare function respawn(): void;
-declare function rm(): void;
-declare function rc(): void;
-declare function rf(): void;
-declare function rcs(): void;
-
-declare function roomLink(roomArg: any): string;
-declare function roomLevels(): void;
-
+/**
+ *  Global Creep lists, Setups, Roles, Actions
+ */
 declare let CreepSetups: {[key: string]: CreepSetup};
 declare let CreepRoles: {[key: string]: CreepRole};
 declare let CreepActions: {[key: string]: CreepAction};
+
+/**
+ * Logging functions
+ *  prints a string to the console, differing colors
+ */
+declare let log: {
+    LOG_ENABLED : boolean,
+    WARN_ENABLED : boolean,
+    ERROR_ENABLED : boolean,
+    DEBUG_ENABLED : boolean,
+    debug(arg: string): void,
+    log(arg: string): void,
+    warn(arg: string): void,
+    err(arg: string): void
+};
+
+/**
+ * JSON.stringify wrapper
+ *  JSON_STRINGIFY_EXPANDED if true will make the returned string multi line
+ * @param x object to turn into a string
+ * @returns {string} object as a string
+ */
+declare let JSON_STRINGIFY_EXPANDED: boolean;
+declare function ex(x: any) : string;
+
+/**
+ * Converts an error code into a string equivalent
+ * @param err ERR_* constant number value
+ * @returns {string} string version of the ERR_* constant
+ */
+declare function errName(err: number) : string;
+
+/**
+ * Wipes everything, including memory
+ */
+declare function respawn(): void;
+/**
+ * Wipes Memory
+ */
+declare function rm(): void;
+/**
+ * Kills all of your creeps
+ */
+declare function rc(): void;
+/**
+ * Removes all of the flags
+ */
+declare function rf(): void;
+/**
+ * Removes all construction sites
+ */
+declare function rcs(): void;
+
+/**
+ * returns string for a link that can be clicked from the console
+ * to change which room you are viewing. Useful for other logging functions
+ * Author: Helam
+ * @param roomArg {Room|RoomObject|RoomPosition|string}
+ * @returns {string}
+ */
+declare function roomLink(roomArg: any): string;
+/**
+ * console function that prints:
+ *  gcl status
+ *  rcl status and significant missing structures for each claimed room
+ */
+declare function roomLevels(): void;
 
 
 //region Prototypes

@@ -112,7 +112,9 @@ export class CreepManager {
         //sort the array if we even have anything
         if (q.length > 0) {
           q = _.sortBy(q, function(a : CreepSetup) { return -a.RCL[rcl].weight; });
+          log.debug('SpawnQueue for room ' + room.name);
           for (let itm in q) {
+            log.debug('#' + itm + ' ' + q[itm].role);
             room.memory.spawnQueue.push(q[itm].role);
           }
         }
