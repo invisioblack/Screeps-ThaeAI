@@ -212,11 +212,9 @@ declare class CreepManager {
  */
 declare class RoomManager {
   /**
-   * Caches the amount of mineable energy in all the sources that have energy left
-   * @param room Room to check
-   * @returns {number} energy
+   * Processes each room
    */
-  static mineableEnergy(room: Room): number;
+  static processRooms(): void;
 }
 
 

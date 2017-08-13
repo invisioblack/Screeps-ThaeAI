@@ -4,6 +4,7 @@ import './setupGlobals';
 
 import {MemoryManager} from './managers/MemoryManager';
 import {CreepManager} from './managers/CreepManager';
+import {RoomManager} from './managers/RoomManager';
 
 
 log.DEBUG_ENABLED = true;
@@ -39,21 +40,11 @@ module.exports.loop = function () {
     CreepManager.processSpawnQueue(Game.rooms[r]);
   }
 
+  //processes every owned room
+  RoomManager.processRooms();
+
   //processes every creep and does .act()
   CreepManager.doActions();
 
 
-  //singing!
-  for (let r in Memory.rooms) {
-    if (ROOM_SINGING)
-      Game.rooms[r].sing("1|2|3");
-
-    let os : Creep[] = Game.rooms[r].find<Creep>(FIND_MY_CREEPS);
-    let i = 0.5;
-    for (let s in os) {
-      let ss : Creep = os[s];
-      new RoomVisual(r).text(ss.name + " TTL: " + ss.ticksToLive, 0, i, {font: 0.5, opacity: 0.7, align: 'left'});
-      i+=0.5;
-    }
-  }
 };
