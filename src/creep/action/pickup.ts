@@ -16,12 +16,10 @@ export class CreepActionPickup extends CreepAction {
   newTarget(creep: Creep): string {
     let ret = '';
 
-    for (let r of creep.room.find<Resource>(FIND_DROPPED_RESOURCES, { filter : { resourceType : RESOURCE_ENERGY }})) {
-      if (r.amount > 20) {
-        ret = r.id;
-        break;
-      }
-    }
+
+    const res = creep.pos.findClosestByRange<Resource>(FIND_DROPPED_RESOURCES, {filter : (s: Resource) =>  s.resourceType == RESOURCE_ENERGY && s.amount > 20});
+    if (res != null)
+      ret = res.id;
 
     return ret;
   }

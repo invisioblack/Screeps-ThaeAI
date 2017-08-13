@@ -111,17 +111,17 @@ Object.defineProperty(Room.prototype, 'neededBatteryEnergy', {
   }
 });
 
-Object.defineProperty(Room.prototype, 'storedEnergy', {
+Object.defineProperty(Room.prototype, 'storageEnergy', {
   configurable: true,
   get: function() : number {
     let ret = 0;
-    if (_.isUndefined(this._storedEnergy)) {
+    if (_.isUndefined(this._storageEnergy)) {
       for (let s of this.find(FIND_STRUCTURES, { filter : function (s: Structure) {return s.structureType == STRUCTURE_CONTAINER || s.structureType == STRUCTURE_STORAGE; }})) {
         ret += s.store[RESOURCE_ENERGY];
       }
-      this._storedEnergy = ret;
+      this._storageEnergy = ret;
     } else {
-      ret = this._storedEnergy;
+      ret = this._storageEnergy;
     }
     return ret;
   }

@@ -166,10 +166,10 @@ interface Room {
   neededBatteryEnergy: number;
   _neededBatteryEnergy: number;
   /**
-   * Total energy stored in contianers/storage
+   * Total energy stored in containers
    */
-  storedEnergy: number;
- _storedEnergy: number;
+  storageEnergy: number;
+  _storageEnergy: number;
 }
 
 interface RoomObject {

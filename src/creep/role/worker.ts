@@ -14,6 +14,7 @@ export class CreepRoleWorker extends CreepRole {
     if (creep.carry.energy == 0) {
       priority = [
         'withdraw',
+        'withdrawStorage',
         'pickup',
         'mine',
         'idle'
@@ -24,6 +25,7 @@ export class CreepRoleWorker extends CreepRole {
         priority = [
           'upgrade',
           'withdraw',
+          'withdrawStorage',
           'pickup',
           'mine',
           'idle'

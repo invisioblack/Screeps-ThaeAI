@@ -10,15 +10,21 @@ export class CreepActionWithdraw extends CreepAction {
   }
 
   isValidAction(creep: Creep): boolean {
-    return ((creep.carryCapacity > creep.carrySum) && creep.room.storedEnergy > 0);
+    return ((creep.carryCapacity > creep.carrySum) && creep.room.storageEnergy > 0);
   }
 
   newTarget(creep: Creep): string {
-    return creep.room.find<Structure>(FIND_STRUCTURES, { filter : (s: Structure) => s.structureType == STRUCTURE_STORAGE || s.structureType == STRUCTURE_CONTAINER})[0].id;
+    let ret = '';
+
+    const res = creep.pos.findClosestByRange<StructureContainer>(FIND_STRUCTURES, { filter : (s: StructureContainer) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0});
+    if (res != null)
+      ret = res.id;
+
+    return ret;
   }
 
   work(creep: Creep): number {
-    return creep.withdraw(Game.getObjectById<Structure>(creep.memory.target), RESOURCE_ENERGY);
+    return creep.withdraw(Game.getObjectById<StructureContainer>(creep.memory.target), RESOURCE_ENERGY);
   }
 }
 

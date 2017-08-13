@@ -23,7 +23,7 @@ global.log = {
   ERROR_ENABLED : true,
   DEBUG_ENABLED : false,
   debug: function(arg: string): void {
-    if (this.DEBUG_ENABLED)return console.log('<span style=color:#005a1d>' + arg + '</span>')
+    if (this.DEBUG_ENABLED)return console.log('<span style=color:#007b27>' + arg + '</span>')
   },
   log: function(arg: string): void {
     if (this.LOG_ENABLED)return console.log(arg)

@@ -16,15 +16,11 @@ export class CreepActionFill extends CreepAction {
   }
 
   newTarget(creep: Creep): string {
-    let places = creep.room.find<StructureSpawn>(FIND_MY_STRUCTURES, {filter : (s : OwnedStructure) =>  s.structureType == STRUCTURE_EXTENSION || s.structureType == STRUCTURE_SPAWN});
     let ret = '';
+    const struct = creep.pos.findClosestByRange<StructureSpawn>(FIND_MY_STRUCTURES, {filter : (s: any) =>  (s.structureType == STRUCTURE_EXTENSION || s.structureType == STRUCTURE_SPAWN) && (s.energy < s.energyCapacity)});
+    if (struct != null)
+      ret = struct.id;
 
-    for (let s of places) {
-      if (s.energy < s.energyCapacity) {
-        ret = s.id;
-        break;
-      }
-    }
     return ret;
   }
 

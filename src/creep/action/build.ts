@@ -14,12 +14,11 @@ export class CreepActionBuild extends CreepAction {
   }
 
   newTarget(creep: Creep): string {
-    let places = creep.room.find<ConstructionSite>(FIND_MY_CONSTRUCTION_SITES);
     let ret = '';
 
-    //TODO pick closest site
-    if (places.length > 0)
-      ret = places[0].id;
+    const struct = creep.pos.findClosestByRange<ConstructionSite>(FIND_MY_CONSTRUCTION_SITES);
+    if (struct != null)
+      ret = struct.id;
 
     return ret;
   }
