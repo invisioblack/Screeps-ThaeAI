@@ -8,16 +8,12 @@ export class CreepActionIdle extends CreepAction {
     super('idle');
   }
 
-  assign(creep: Creep, target?: string) : boolean {
+  assign(creep: Creep) : boolean {
     creep.memory.action = this.name;
     return true;
   }
 
   isValidAction(creep: Creep): boolean {
-    return true;
-  }
-
-  isValidTarget(creep: Creep, target: string): boolean {
     return true;
   }
 

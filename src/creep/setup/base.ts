@@ -111,4 +111,13 @@ export class CreepSetup {
       total += BODYPART_COST[s];
     return total;
   }
+
+  /**
+   * Sorts the body into preferred loss order
+   * @param {string[]} body body to sort
+   * @returns {string[]} sorted body
+   */
+  static sortBody(body: string[]): string[] {
+    return _.sortBy(body, p => _.indexOf([TOUGH,MOVE,WORK,CARRY,ATTACK,RANGED_ATTACK,HEAL,CLAIM],p))
+  }
 }

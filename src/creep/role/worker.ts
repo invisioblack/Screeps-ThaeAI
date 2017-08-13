@@ -43,9 +43,9 @@ export class CreepRoleWorker extends CreepRole {
         priority = [
           'fill',
           'build',
-          //'repair',
+          'repair',
+          //'fillStorage',
           'upgrade',
-          'fillStorage',
           'idle'
         ];
       }

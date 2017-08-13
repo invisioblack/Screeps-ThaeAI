@@ -2,9 +2,6 @@
 
 import {CreepAction} from './base';
 
-/**
- * Action meant for miners to mine
- */
 export class CreepActionMinerMine extends CreepAction {
 
   constructor() {
@@ -12,34 +9,15 @@ export class CreepActionMinerMine extends CreepAction {
     this.range = 1;
   }
 
-  assign(creep: Creep, target?: string) : boolean {
-    let ret = false;
-    if (this.isValidAction(creep)) {
-      if (!this.isValidTarget(creep, target)) {
-        target = this.newTarget(creep);
-      }
-      if (target != '') {
-        creep.memory.action = this.name;
-        creep.memory.target = target;
-        Memory.sources[target].dedicatedMiner = creep.name;
-        ret = true;
-      }
-    } else {
-      ret = false;
-    }
+  assign(creep: Creep) : boolean {
+    let ret = super.assign(creep);
+    if (ret)
+      Memory.sources[creep.memory.target].dedicatedMiner = creep.name;
     return ret;
   }
 
   isValidAction(creep: Creep): boolean {
     return creep.memory.role == 'miner';
-  }
-
-  isValidTarget(creep: Creep, target: string): boolean {
-    let src = Game.getObjectById<Source>(target);
-    let ret = false;
-    if (src != null)
-      ret = src.energy > 0;
-    return ret;
   }
 
   newTarget(creep: Creep): string {
@@ -50,7 +28,6 @@ export class CreepActionMinerMine extends CreepAction {
       if ((_.isUndefined(src.dedicatedMiner)) || (src.dedicatedMiner && src.dedicatedMiner == creep.name)) {
         ret = s;
         break;
-        //found one, break to save cpu
       }
     }
 

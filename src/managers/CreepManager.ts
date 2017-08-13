@@ -77,11 +77,16 @@ export class CreepManager {
 
     //not enough energy to make the maxed out body
     //TODO try and make a smaller creep?
+    //TODO add emergency worker creep for when we break spawning here, check age of spawn queue
     let cost = CreepSetup.getBodyCost(body);
     if (cost > energyAvailable) {
       log.debug('Attempted to make a ' + name + " but there wasn't enough energy! Deficit of: " + (cost - energyAvailable));
       return false;
     }
+
+    //sort the body
+    //TODO maybe different sort for differing purposes?
+    body = CreepSetup.sortBody(body);
 
     //we have memory, a body, and a name. Checked for energy, try and spawn it now
     if (spawner.canCreateCreep(body, name) === OK) {

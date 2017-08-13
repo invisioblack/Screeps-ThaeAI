@@ -1,63 +1,29 @@
 'use strict';
 
-/**
- * CreepAction
- *  Base Action class
- */
 export abstract class CreepAction {
-  /**
-   * String name of the action
-   */
   name: string;
-  /**
-   * Maximum range at which action can occur
-   */
   range: number;
 
-  /**
-   * Constructor
-   * @param name string name of action
-   */
   constructor (name: string) {
     this.name = name;
     this.range = 0;
   }
 
-  /**
-   * Assigns the action to the creep
-   * @param creep target creep
-   * @param target target id string
-   * @return {boolean} whether or not assignment succeeded
-   */
-  abstract assign(creep: Creep, target?: string) : boolean;
+  assign(creep: Creep) : boolean {
+    let ret = false;
+    if (this.isValidAction(creep)) {
+      let target = this.newTarget(creep);
+      if (target != '') {
+        creep.memory.action = this.name;
+        creep.memory.target = target;
+        ret = true;
+      }
+    } else {
+      ret = false;
+    }
+    return ret;
+  }
 
-  /**
-   * Checks whether or not the creep is allowed to do this action
-   * @param creep target creep
-   * @return {boolean} whether or action is allowed
-   */
-  abstract isValidAction(creep: Creep): boolean;
-
-  /**
-   * Checks whether or not the supplied target is valid for this action and creep
-   * @param creep target creep
-   * @param target target object
-   * @return {boolean} whether or not target is allowed
-   */
-  abstract isValidTarget(creep: Creep, target: string): boolean;
-
-  /**
-   * Gets a new target for the action.
-   * @param creep
-   * @return {string} String ID of new object
-   */
-  abstract newTarget(creep: Creep): string;
-
-  /**
-   * Performs the next step required for this action, be it drive or work
-   * If work fails, get a new action
-   * @param creep target creep
-   */
   step(creep: Creep): void {
     let target = Game.getObjectById<RoomObject>(creep.memory.target);
     let rangeTo = target ? creep.pos.getRangeTo(target.pos) : 0;
@@ -76,10 +42,8 @@ export abstract class CreepAction {
 
   }
 
-  /**
-   * Performs the work action of this creep
-   * @param creep
-   * @return {number} ERR_* code of work status
-   */
+  abstract isValidAction(creep: Creep): boolean;
+  abstract newTarget(creep: Creep): string;
   abstract work(creep: Creep): number;
+
 }

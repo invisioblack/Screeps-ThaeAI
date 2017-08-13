@@ -17,6 +17,9 @@ declare function rc(): void;
 declare function rf(): void;
 declare function rcs(): void;
 
+declare function roomLink(roomArg: any): string;
+declare function roomLevels(): void;
+
 declare let CreepSetups: {[key: string]: CreepSetup};
 declare let CreepRoles: {[key: string]: CreepRole};
 declare let CreepActions: {[key: string]: CreepAction};
@@ -320,6 +323,13 @@ declare class CreepSetup {
    * @returns {number} total cost of body
    */
   static getBodyCost(body: string[]): number;
+
+  /**
+   * Sorts the body into preferred loss order
+   * @param {string[]} body body to sort
+   * @returns {string[]} sorted body
+   */
+  static sortBody(body: string[]): string[];
 }
 //endregion
 
@@ -359,24 +369,15 @@ declare abstract class CreepAction {
   /**
    * Assigns the action to the creep
    * @param creep target creep
-   * @param target target id string
    * @return {boolean} whether or not assignment succeeded
    */
-  abstract assign(creep: Creep, target?: string): boolean;
+  abstract assign(creep: Creep): boolean;
   /**
    * Checks whether or not the creep is allowed to do this action
    * @param creep target creep
    * @return {boolean} whether or action is allowed
    */
   abstract isValidAction(creep: Creep): boolean;
-  /**
-   * Checks whether or not the supplied target is valid for this action and creep
-   *  Performs type validation for target type here
-   * @param creep target creep
-   * @param target target object
-   * @return {boolean} whether or not target is allowed
-   */
-  abstract isValidTarget(creep: Creep, target: string): boolean;
   /**
    * Gets a new target for the action.
    * @param creep
@@ -396,15 +397,5 @@ declare abstract class CreepAction {
    */
   abstract work(creep: Creep): number;
 }
-
-declare class CreepActionIdle extends CreepAction {
-  constructor();
-  assign(creep: Creep, target?: string) : boolean;
-  isValidAction(creep: Creep): boolean;
-  isValidTarget(creep: Creep, target: string): boolean;
-  newTarget(creep: Creep): string;
-  work(creep: Creep): number;
-}
-
 
 //endregion
