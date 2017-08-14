@@ -26,6 +26,12 @@ declare let CreepRoles: {[key: string]: CreepRole};
 declare let CreepActions: {[key: string]: CreepAction};
 
 /**
+ * Injects LoAN map into screeps
+ */
+declare function injectLoAN(): void;
+
+
+/**
  * Logging functions
  *  prints a string to the console, differing colors
  */
@@ -179,6 +185,18 @@ interface Room {
    */
   storageEnergy: number;
   _storageEnergy: number;
+  /**
+   * Returns the mineral type of the room.
+   * Stores it in memory if not already stored.
+   */
+  mineralType: string;
+  _mineralType: string;
+  /**
+   * Returns the mineral object in the room.
+   * Stores the id in memory if not already stored.
+   */
+  mineral: Mineral;
+  _mineral: Mineral;
 }
 
 interface RoomObject {
@@ -204,6 +222,10 @@ interface RoomPosition {
    * Is a location occupied by a creep. Credit: proximo
    */
   isOccupied: boolean;
+}
+
+interface RoomVisual {
+  structure(x: number, y: number, type: string , opts?: any) : void;
 }
 
 interface Source {

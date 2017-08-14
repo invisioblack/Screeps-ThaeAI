@@ -1,11 +1,11 @@
 'use strict';
-
 import './setupGlobals';
 
 import {MemoryManager} from './managers/MemoryManager';
 import {CreepManager} from './managers/CreepManager';
 import {RoomManager} from './managers/RoomManager';
 
+injectLoAN();
 
 log.DEBUG_ENABLED = true;
 log.LOG_ENABLED = true;

@@ -1,5 +1,9 @@
 'use strict';
 
+Structure.prototype.toString = function (htmlLink = true): string {
+  return `[structure (${this.structureType}) #${this.id} ${this.pos.toString(htmlLink, this.id, 'structures.' + this.id)}]`;
+};
+
 Object.defineProperty(Structure.prototype, "memory", {
   get: function () {
     if (!Memory.structures) {

@@ -126,3 +126,45 @@ Object.defineProperty(Room.prototype, 'storageEnergy', {
     return ret;
   }
 });
+
+
+
+
+Object.defineProperty(Room.prototype, 'mineralType', {
+  get: function(): string {
+    if (this == undefined || this.name == undefined)
+      return undefined;
+    if (!this._mineralType) {
+      if (!this.memory.mineralType) {
+        this.memory.mineralType = (this.find(FIND_MINERALS)[0] || {}).mineralType;
+      }
+      this._mineralType = this.memory.mineralType;
+    }
+    return this._mineralType;
+  },
+  enumerable: false,
+  configurable: true
+});
+
+
+Object.defineProperty(Room.prototype, 'mineral', {
+  get: function(): Mineral {
+    if (this == undefined || this.name == undefined)
+      return undefined;
+    if (!this._mineral) {
+      if (this.memory.mineralId === undefined) {
+        let [mineral] = this.find(FIND_MINERALS);
+        if (!mineral) {
+          return this.memory.mineralId = null;
+        }
+        this._mineral = mineral;
+        this.memory.mineralId = mineral.id;
+      } else {
+        this._mineral = Game.getObjectById(this.memory.mineralId);
+      }
+    }
+    return this._mineral;
+  },
+  enumerable: false,
+  configurable: true
+});

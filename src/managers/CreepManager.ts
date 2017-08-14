@@ -51,7 +51,8 @@ export class CreepManager {
       target:     '',
       role:       setup.role,
       action:     'idle',
-      singing:    'This|is|the|song|that|never|ends|It|goes|on|and|on|my|friends|A|few|creeps|started|singing|it|not|knowing|what|it|was|They\'re|singing|forever|and|ever|for|the|reason|just|because'
+      singing:    ''
+      //singing:    'This|is|the|song|that|never|ends|It|goes|on|and|on|my|friends|A|few|creeps|started|singing|it|not|knowing|what|it|was|They\'re|singing|forever|and|ever|for|the|reason|just|because'
     };
 
     //if we can make body bigger, find the max amount multiBody we can add with avail energy, accounting for base body, not exceeding maxMult
@@ -112,14 +113,16 @@ export class CreepManager {
         //sort the array if we even have anything
         if (q.length > 0) {
           q = _.sortBy(q, function(a : CreepSetup) { return -a.RCL[rcl].weight; });
-          log.debug('SpawnQueue for room ' + room.name);
           for (let itm in q) {
-            log.debug('#' + itm + ' ' + q[itm].role);
             room.memory.spawnQueue.push(q[itm].role);
           }
         }
       }
     }
+
+    log.debug('SpawnQueue for room ' + room.name);
+    for (let itm in room.memory.spawnQueue)
+      log.debug('#' + itm + ' ' + room.memory.spawnQueue[itm]);
   }
 
   static processSpawnQueue(room: Room) {

@@ -8,6 +8,10 @@ export class RoomManager {
     //singing!
     for (let r in Memory.rooms) {
       const room = Game.rooms[r];
+
+
+      //new RoomVisual(r).test();
+
       if (ROOM_SINGING)
         room.sing("This|is|the|song|that|never|ends|It|goes|on|and|on|my|friends|A|few|creeps|started|singing|it|not|knowing|what|it|was|They're|singing|forever|and|ever|for|the|reason|just|because");
 
@@ -31,16 +35,7 @@ export class RoomManager {
     const towers = room.find<StructureTower>(FIND_MY_STRUCTURES, {filter: function(t: Structure) { return t.structureType == STRUCTURE_TOWER;}});
     for (let t in towers) {
 
-      //hostile creeps
-      let hostiles = room.find<Creep>(FIND_HOSTILE_CREEPS);
-      if (hostiles.length > 0) {
-        for (let h in hostiles) {
-          if (towers[t].attack(hostiles[h]) == OK)
-            log.debug("Tower: " + towers[t].id + " is attacking " + hostiles[h].owner);
-          else
-            log.debug("Tower: " + towers[t].id + " is out of energy");
-        }
-      }
+
 
       //heal creeps
       let friendlies = room.find<Creep>(FIND_MY_CREEPS, {filter: (c: Creep) => c.hits < c.hitsMax});
@@ -65,6 +60,17 @@ export class RoomManager {
               log.debug("Tower: " + towers[t].id + " is out of energy");
             break;
           }
+        }
+      }
+
+      //hostile creeps
+      let hostiles = room.find<Creep>(FIND_HOSTILE_CREEPS);
+      if (hostiles.length > 0) {
+        for (let h in hostiles) {
+          if (towers[t].attack(hostiles[h]) == OK)
+            log.debug("Tower: " + towers[t].id + " is attacking " + hostiles[h].owner);
+          else
+            log.debug("Tower: " + towers[t].id + " is out of energy");
         }
       }
     }

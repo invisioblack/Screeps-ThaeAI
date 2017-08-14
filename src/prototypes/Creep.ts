@@ -1,5 +1,9 @@
 'use strict';
 
+Creep.prototype.toString = function (htmlLink = true): string {
+  return `[${(this.name ? this.name : this.id)} ${this.pos.toString(htmlLink, this.id, 'creeps.'+this.name)}]`;
+};
+
 Creep.prototype.getActiveBodyparts = function (type: string): number {
   let count = 0;
   for (let i = this.body.length; i-- > 0;) {
